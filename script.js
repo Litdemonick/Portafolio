@@ -14,7 +14,16 @@ const translations = {
         hero_desc: "Creando experiencias digitales que cobran vida.",
         btn_projects: "Ver Proyectos",
         btn_contact: "Contactar",
-        footer_rights: "Todos los derechos reservados."
+        footer_rights: "Todos los derechos reservados.",
+        about_title: "Sobre Mí",
+        about_intro: "Soy un apasionado <strong>desarrollador Back-end</strong> con una sólida vocación por construir la arquitectura digital que hace funcionar al mundo. Mi objetivo es crear soluciones robustas, escalables y eficientes que no solo cumplan con los requisitos técnicos, sino que también impulsen el éxito de cada proyecto.",
+        about_timeline_title: "Mi Trayectoria",
+        about_pro_exp_title: "Experiencia Profesional",
+        about_pro_exp_desc: "He tenido el privilegio de colaborar en la creación de páginas web para diversas empresas, desarrollando sistemas back-end a medida que potencian sus operaciones y mejoran la experiencia del usuario final.",
+        about_academic_title: "Proyectos Académicos Destacados",
+        about_academic_desc: "Durante mi formación universitaria, participé activamente en proyectos desafiantes bajo la tutela del profesor <strong>Ibarra Napoleón</strong>. Estas experiencias, junto con la superación de talleres y parciales semestrales, forjaron mi capacidad para resolver problemas complejos y trabajar eficazmente en equipo.",
+        about_learning_title: "Aprendizaje Continuo",
+        about_learning_desc: "El mundo de la tecnología está en constante evolución, y yo con él. Me dedico a aprender y dominar nuevas tecnologías para mantenerme a la vanguardia del desarrollo de software."
     },
     en: {
         nav_home: "Home",
@@ -25,7 +34,16 @@ const translations = {
         hero_desc: "Creating digital experiences that come alive.",
         btn_projects: "View Projects",
         btn_contact: "Contact Me",
-        footer_rights: "All rights reserved."
+        footer_rights: "All rights reserved.",
+        about_title: "About Me",
+        about_intro: "I am a passionate <strong>Back-end developer</strong> with a strong vocation for building the digital architecture that makes the world work. My goal is to create robust, scalable, and efficient solutions that not only meet technical requirements but also drive the success of each project.",
+        about_timeline_title: "My Journey",
+        about_pro_exp_title: "Professional Experience",
+        about_pro_exp_desc: "I have had the privilege of collaborating on the creation of websites for various companies, developing custom back-end systems that power their operations and enhance the end-user experience.",
+        about_academic_title: "Key Academic Projects",
+        about_academic_desc: "During my university studies, I actively participated in challenging projects under the guidance of Professor <strong>Ibarra Napoleón</strong>. These experiences, along with successfully completing semester workshops and exams, forged my ability to solve complex problems and work effectively in a team.",
+        about_learning_title: "Continuous Learning",
+        about_learning_desc: "The world of technology is constantly evolving, and so am I. I am dedicated to learning and mastering new technologies to stay at the forefront of software development."
     }
 };
 
@@ -43,20 +61,38 @@ function updateTexts() {
     elements.forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (translations[currentLang][key]) {
-            el.textContent = translations[currentLang][key];
+            // Usamos innerHTML para que las etiquetas como <strong> funcionen
+            el.innerHTML = translations[currentLang][key];
+            // Actualizamos el data-text para el efecto glitch
+            if (el.classList.contains('glitch-effect')) {
+                el.setAttribute('data-text', el.textContent);
+            }
         }
     });
 }
 
 // FUNCIÓN CAMBIAR TEMA
-themeToggle.addEventListener('click', () => {
-    if (body.getAttribute('data-theme') === 'light') {
-        body.setAttribute('data-theme', 'dark');
-        themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
-    } else {
-        body.setAttribute('data-theme', 'light');
+function applyTheme(theme) {
+    body.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    if (theme === 'light') {
         themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
+    } else {
+        themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
     }
+}
+
+themeToggle.addEventListener('click', () => {
+    const currentTheme = body.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    applyTheme(newTheme);
+});
+
+// Aplicar tema guardado al cargar la página
+document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme') || 'dark'; // 'dark' como predeterminado
+    applyTheme(savedTheme);
+    updateTexts(); // Asegurarse de que los textos se carguen con el idioma correcto
 });
 
 // --- ANIMACIONES CON SCROLL (INTERSECTION OBSERVER) ---
