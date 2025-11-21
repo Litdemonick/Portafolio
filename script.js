@@ -58,3 +58,40 @@ themeToggle.addEventListener('click', () => {
         themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
     }
 });
+
+// --- ANIMACIONES CON SCROLL (INTERSECTION OBSERVER) ---
+
+// Función para manejar la visibilidad de los elementos
+const handleIntersection = (entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            
+            // Animación especial para la línea de la timeline
+            if (entry.target.id === 'experience-timeline') {
+                const timelineBar = document.querySelector('.timeline::before');
+                if (timelineBar) {
+                    // Se asegura que el alto sea el del contenedor
+                    timelineBar.style.height = entry.target.querySelector('.timeline').offsetHeight + 'px';
+                }
+            }
+            
+            // Dejar de observar el elemento una vez que es visible
+            observer.unobserve(entry.target);
+        }
+    });
+};
+
+// Crear el observador
+const observer = new IntersectionObserver(handleIntersection, {
+    root: null, // viewport
+    rootMargin: '0px',
+    threshold: 0.2 // El elemento debe ser visible en un 20% para activar
+});
+
+// Observar todos los elementos que queremos animar
+// Solo se ejecuta si estamos en la página sobremi.html
+if (document.querySelector('.about-main')) {
+    const animatedElements = document.querySelectorAll('#about-intro, #experience-timeline, .timeline-item');
+    animatedElements.forEach(el => observer.observe(el));
+}
