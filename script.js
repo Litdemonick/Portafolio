@@ -23,7 +23,11 @@ const translations = {
         about_academic_title: "Proyectos Académicos Destacados",
         about_academic_desc: "Durante mi formación universitaria, participé activamente en proyectos desafiantes bajo la tutela del profesor <strong>Ibarra Napoleón</strong>. Estas experiencias, junto con la superación de talleres y parciales semestrales, forjaron mi capacidad para resolver problemas complejos y trabajar eficazmente en equipo.",
         about_learning_title: "Aprendizaje Continuo",
-        about_learning_desc: "El mundo de la tecnología está en constante evolución, y yo con él. Me dedico a aprender y dominar nuevas tecnologías para mantenerme a la vanguardia del desarrollo de software."
+        about_learning_desc: "El mundo de la tecnología está en constante evolución, y yo con él. Me dedico a aprender y dominar nuevas tecnologías para mantenerme a la vanguardia del desarrollo de software.",
+        skills_title: "Mis Habilidades",
+        skills_intro_p1: "Mi enfoque se centra en la <strong>eficiencia y la calidad</strong>. Disfruto entregando trabajos a gran velocidad, pero nunca a costa del detalle. Cada línea de código está pensada para ser robusta, escalable y pulida.",
+        skills_intro_p2: "Poseo una gran facilidad para comprender nuevos lenguajes y tecnologías. Aunque mi experiencia es focalizada, mi capacidad de aprendizaje rápido me permite adaptarme y ser productivo en cualquier entorno tecnológico.",
+        skills_tech_title: "Tecnologías y Herramientas"
     },
     en: {
         nav_home: "Home",
@@ -43,7 +47,11 @@ const translations = {
         about_academic_title: "Key Academic Projects",
         about_academic_desc: "During my university studies, I actively participated in challenging projects under the guidance of Professor <strong>Ibarra Napoleón</strong>. These experiences, along with successfully completing semester workshops and exams, forged my ability to solve complex problems and work effectively in a team.",
         about_learning_title: "Continuous Learning",
-        about_learning_desc: "The world of technology is constantly evolving, and so am I. I am dedicated to learning and mastering new technologies to stay at the forefront of software development."
+        about_learning_desc: "The world of technology is constantly evolving, and so am I. I am dedicated to learning and mastering new technologies to stay at the forefront of software development.",
+        skills_title: "My Skills",
+        skills_intro_p1: "My approach focuses on <strong>efficiency and quality</strong>. I enjoy delivering work at high speed, but never at the expense of detail. Every line of code is designed to be robust, scalable, and polished.",
+        skills_intro_p2: "I have a great ability to understand new languages and technologies. Although my experience is focused, my rapid learning ability allows me to adapt and be productive in any technological environment.",
+        skills_tech_title: "Technologies & Tools"
     }
 };
 
@@ -129,5 +137,10 @@ const observer = new IntersectionObserver(handleIntersection, {
 // Solo se ejecuta si estamos en la página sobremi.html
 if (document.querySelector('.about-main')) {
     const animatedElements = document.querySelectorAll('#about-intro, #experience-timeline, .timeline-item');
+    animatedElements.forEach(el => observer.observe(el));
+}
+
+if (document.querySelector('.skills-main')) {
+    const animatedElements = document.querySelectorAll('#skills-intro, #tech-skills');
     animatedElements.forEach(el => observer.observe(el));
 }
