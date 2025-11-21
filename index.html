@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carlos Miranda | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header id="header">
+        <nav>
+            <div class="logo">
+                <img src="assets/tu-foto.jpg" alt="Avatar" class="avatar"> <span class="dev-name">&lt;Carlos /&gt;</span>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="#hero" data-i18n="nav_home">Inicio</a></li>
+                <li><a href="#about" data-i18n="nav_about">Sobre mí</a></li>
+                <li><a href="#projects" data-i18n="nav_projects">Proyectos</a></li>
+                <li><a href="#skills" data-i18n="nav_skills">Habilidades</a></li>
+            </ul>
+
+            <div class="controls">
+                <button id="lang-toggle" class="btn-icon">
+                    <span class="lang-text">ES</span>
+                    <i class="fa-solid fa-language"></i>
+                </button>
+                <button id="theme-toggle" class="btn-icon">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </div>
+
+            <div class="hamburger">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <div class="hero-content">
+            <h1 class="glitch-effect">Carlos Miranda</h1>
+            <h2 class="typing-effect" data-i18n="hero_title">Desarrollador Web Back-end</h2>
+            <p data-i18n="hero_desc">Creando experiencias digitales que cobran vida.</p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn primary" data-i18n="btn_projects">Ver Proyectos</a>
+                <a href="#contact" class="btn secondary" data-i18n="btn_contact">Contactar</a>
+            </div>
+        </div>
+        <div class="background-pattern"></div>
+    </section>
+
+    <footer>
+        <div class="social-icons">
+            <a href="#"><i class="fa-brands fa-github"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+        <p>&copy; 2025 Carlos Miranda. <span data-i18n="footer_rights">Todos los derechos reservados.</span></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
