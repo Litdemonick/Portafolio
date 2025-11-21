@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Mí | Carlos Miranda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="sobremi.style.css">
+</head>
+<body>
+
+    <header id="header">
+        <nav>
+            <div class="logo">
+                <img src="assets/default.png" alt="Avatar" class="avatar"> <span class="dev-name">&lt;Carlos /&gt;</span>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="index.html" data-i18n="nav_home">Inicio</a></li>
+                <li><a href="sobremi.html" class="active" data-i18n="nav_about">Sobre mí</a></li>
+                <li><a href="index.html#projects" data-i18n="nav_projects">Proyectos</a></li>
+                <li><a href="index.html#skills" data-i18n="nav_skills">Habilidades</a></li>
+            </ul>
+
+            <div class="controls">
+                <button id="lang-toggle" class="btn-icon">
+                    <span class="lang-text">ES</span>
+                    <i class="fa-solid fa-language"></i>
+                </button>
+                <button id="theme-toggle" class="btn-icon">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </div>
+
+            <div class="hamburger">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main class="about-main">
+        <section id="about-intro" class="about-section">
+            <div class="about-text">
+                <h1 class="glitch-effect" data-text="Sobre Mí">Sobre Mí</h1>
+                <p>
+                    Soy un apasionado <strong>desarrollador Back-end</strong> con una sólida vocación por construir la arquitectura digital que hace funcionar al mundo. Mi objetivo es crear soluciones robustas, escalables y eficientes que no solo cumplan con los requisitos técnicos, sino que también impulsen el éxito de cada proyecto.
+                </p>
+            </div>
+            <div class="about-image">
+                <img src="assets/default.png" alt="Carlos Miranda">
+            </div>
+        </section>
+
+        <section id="experience-timeline" class="about-section">
+            <h2>Mi Trayectoria</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-icon"><i class="fa-solid fa-building"></i></div>
+                    <div class="timeline-content">
+                        <h3>Experiencia Profesional</h3>
+                        <p>He tenido el privilegio de colaborar en la creación de páginas web para diversas empresas, desarrollando sistemas back-end a medida que potencian sus operaciones y mejoran la experiencia del usuario final.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon"><i class="fa-solid fa-university"></i></div>
+                    <div class="timeline-content">
+                        <h3>Proyectos Académicos Destacados</h3>
+                        <p>Durante mi formación universitaria, participé activamente en proyectos desafiantes bajo la tutela del profesor <strong>Ibarra Napoleón</strong>. Estas experiencias, junto con la superación de talleres y parciales semestrales, forjaron mi capacidad para resolver problemas complejos y trabajar eficazmente en equipo.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon"><i class="fa-solid fa-code"></i></div>
+                    <div class="timeline-content">
+                        <h3>Aprendizaje Continuo</h3>
+                        <p>El mundo de la tecnología está en constante evolución, y yo con él. Me dedico a aprender y dominar nuevas tecnologías para mantenerme a la vanguardia del desarrollo de software.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-icons">
+            <a href="https://github.com/Litdemonick" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
+            <a href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+        <p>&copy; 2025 Carlos Miranda. <span data-i18n="footer_rights">Todos los derechos reservados.</span></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
