@@ -103,6 +103,13 @@
     font-family: var(--font-code);
     font-size: 0.9rem;
     color: var(--text-color);
+    text-align: center; /* Centra el texto si se divide en dos líneas */
+}
+
+/* Estilo específico para el ícono de Django */
+.django-icon {
+    color: #092e20; /* Color oficial de Django */
+    transition: color 0.4s ease;
 }
 
 /* Animación de "flote" para los íconos */
