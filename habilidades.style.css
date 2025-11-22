@@ -65,7 +65,7 @@
 }
 
 .skill-card {
-    background-color: #222;
+    background-color: var(--card-bg);
     width: 120px;
     height: 120px;
     border-radius: 15px;
