@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyectos | Carlos Miranda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="proyectos.style.css">
+</head>
+<body>
+
+    <header id="header">
+        <nav>
+            <div class="logo">
+                <img src="assets/default.png" alt="Avatar" class="avatar"> <span class="dev-name">&lt;Carlos /&gt;</span>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="index.html" data-i18n="nav_home">Inicio</a></li>
+                <li><a href="sobremi.html" data-i18n="nav_about">Sobre mí</a></li>
+                <li><a href="proyectos.html" class="active" data-i18n="nav_projects">Proyectos</a></li>
+                <li><a href="habilidades.html" data-i18n="nav_skills">Habilidades</a></li>
+            </ul>
+
+            <div class="controls">
+                <button id="lang-toggle" class="btn-icon">
+                    <span class="lang-text">ES</span>
+                    <i class="fa-solid fa-language"></i>
+                </button>
+                <button id="theme-toggle" class="btn-icon">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+            </div>
+
+            <div class="hamburger">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main class="projects-main">
+        <section id="projects-intro">
+            <h1 class="glitch-effect" data-i18n="projects_title" data-text="Mis Proyectos">Mis Proyectos</h1>
+            <p data-i18n="projects_intro">
+                Aquí hay una selección de proyectos en los que he trabajado. Cada uno representa un desafío único y una oportunidad para aprender y aplicar nuevas tecnologías.
+            </p>
+        </section>
+
+        <section id="project-gallery">
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="https://placehold.co/600x400/222/00ff9d?text=Proyecto+1" alt="Vista previa del Proyecto 1">
+                </div>
+                <div class="project-info">
+                    <h3 data-i18n="project1_title">Nombre del Proyecto 1</h3>
+                    <p data-i18n="project1_desc">Una breve descripción de lo que hace este proyecto, los problemas que resuelve y las tecnologías clave utilizadas.</p>
+                    <div class="project-tags">
+                        <span>Python</span>
+                        <span>Django</span>
+                        <span>PostgreSQL</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Código</a>
+                        <a href="#" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Demo</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="https://placehold.co/600x400/222/00ff9d?text=Proyecto+2" alt="Vista previa del Proyecto 2">
+                </div>
+                <div class="project-info">
+                    <h3 data-i18n="project2_title">Nombre del Proyecto 2</h3>
+                    <p data-i18n="project2_desc">Una breve descripción de lo que hace este proyecto, los problemas que resuelve y las tecnologías clave utilizadas.</p>
+                    <div class="project-tags">
+                        <span>Node.js</span>
+                        <span>MongoDB</span>
+                        <span>AWS</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Código</a>
+                        <a href="#" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Demo</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Agrega más tarjetas de proyectos aquí -->
+
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-icons">
+            <a href="https://github.com/Litdemonick" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
+            <a href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+        <p>&copy; 2025 Carlos Miranda. <span data-i18n="footer_rights">Todos los derechos reservados.</span></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

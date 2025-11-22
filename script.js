@@ -27,7 +27,13 @@ const translations = {
         skills_title: "Mis Habilidades",
         skills_intro_p1: "Mi enfoque se centra en la <strong>eficiencia y la calidad</strong>. Disfruto entregando trabajos a gran velocidad, pero nunca a costa del detalle. Cada línea de código está pensada para ser robusta, escalable y pulida.",
         skills_intro_p2: "Poseo una gran facilidad para comprender nuevos lenguajes y tecnologías. Aunque mi experiencia es focalizada, mi capacidad de aprendizaje rápido me permite adaptarme y ser productivo en cualquier entorno tecnológico.",
-        skills_tech_title: "Tecnologías y Herramientas"
+        skills_tech_title: "Tecnologías y Herramientas",
+        projects_title: "Mis Proyectos",
+        projects_intro: "Aquí hay una selección de proyectos en los que he trabajado. Cada uno representa un desafío único y una oportunidad para aprender y aplicar nuevas tecnologías.",
+        project1_title: "Nombre del Proyecto 1",
+        project1_desc: "Una breve descripción de lo que hace este proyecto, los problemas que resuelve y las tecnologías clave utilizadas.",
+        project2_title: "Nombre del Proyecto 2",
+        project2_desc: "Una breve descripción de lo que hace este proyecto, los problemas que resuelve y las tecnologías clave utilizadas."
     },
     en: {
         nav_home: "Home",
@@ -51,7 +57,13 @@ const translations = {
         skills_title: "My Skills",
         skills_intro_p1: "My approach focuses on <strong>efficiency and quality</strong>. I enjoy delivering work at high speed, but never at the expense of detail. Every line of code is designed to be robust, scalable, and polished.",
         skills_intro_p2: "I have a great ability to understand new languages and technologies. Although my experience is focused, my rapid learning ability allows me to adapt and be productive in any technological environment.",
-        skills_tech_title: "Technologies & Tools"
+        skills_tech_title: "Technologies & Tools",
+        projects_title: "My Projects",
+        projects_intro: "Here is a selection of projects I have worked on. Each one represents a unique challenge and an opportunity to learn and apply new technologies.",
+        project1_title: "Project Name 1",
+        project1_desc: "A brief description of what this project does, the problems it solves, and the key technologies used.",
+        project2_title: "Project Name 2",
+        project2_desc: "A brief description of what this project does, the problems it solves, and the key technologies used."
     }
 };
 
@@ -142,5 +154,10 @@ if (document.querySelector('.about-main')) {
 
 if (document.querySelector('.skills-main')) {
     const animatedElements = document.querySelectorAll('#skills-intro, #tech-skills');
+    animatedElements.forEach(el => observer.observe(el));
+}
+
+if (document.querySelector('.projects-main')) {
+    const animatedElements = document.querySelectorAll('#projects-intro, #project-gallery');
     animatedElements.forEach(el => observer.observe(el));
 }
