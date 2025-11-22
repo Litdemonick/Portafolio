@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Final: Consultores Chiriquí S.A. | Portafolio</title>
+    
+    <script src="../scripts/protect.js" defer></script>
+
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+
+    <style>
+        :root {
+            /* Colores Base (Tema Corporativo/RRHH - Royal Blue & Emerald) */
+            --primary-color: #1565c0; /* Royal Blue */
+            --primary-dark: #0d47a1;
+            --secondary-color: #2e7d32; /* Emerald Green (Growth/Finance) */
+            --accent-color: #fdd835; /* Gold (Highlights) */
+            
+            /* Variables de Tema */
+            --bg-body: #f4f6f8;
+            --bg-card: #ffffff;
+            --text-main: #37474f;
+            --text-muted: #607d8b;
+            --text-header: #ffffff;
+            --meta-bg: #e3f2fd;
+            --meta-border: #bbdefb;
+            --card-shadow: 0 4px 20px rgba(21, 101, 192, 0.1);
+            --highlight-bg: #e8f5e9;
+            --highlight-text: #1b5e20;
+            --btn-back-bg: #455a64;
+            --btn-back-hover: #263238;
+        }
+
+        /* MODO OSCURO */
+        html.dark-mode {
+            --primary-color: #64b5f6;
+            --primary-dark: #002171;
+            --secondary-color: #66bb6a;
+            --accent-color: #ffee58;
+            --bg-body: #102027;
+            --bg-card: #1c2830;
+            --text-main: #eceff1;
+            --text-muted: #b0bec5;
+            --meta-bg: #263238;
+            --meta-border: #37474f;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+            --highlight-bg: #1b5e20;
+            --highlight-text: #e8f5e9;
+            --btn-back-bg: #37474f;
+            --btn-back-hover: #102027;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--bg-body);
+            margin: 0; padding: 0;
+        }
+
+        body.animate-transition {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease;
+            border-top: 5px solid var(--primary-color);
+        }
+        
+        .card:hover {
+            transform: translateY(-3px);
+            border-top-color: var(--secondary-color);
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+            color: var(--text-header);
+            padding: 3rem 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+            position: relative;
+        }
+
+        header h1 { margin: 0; font-size: 2.2rem; font-weight: 700; letter-spacing: 0.5px; }
+        header p { font-size: 1.1rem; opacity: 0.95; margin-top: 10px; font-weight: 400; }
+
+        .theme-toggle-btn {
+            position: absolute;
+            top: 20px; right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        .theme-toggle-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: rotate(15deg);
+        }
+
+        /* Contenedor */
+        .container {
+            max-width: 1000px;
+            margin: -40px auto 2rem auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .card h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--meta-border);
+            padding-bottom: 10px; margin-top: 0;
+            font-size: 1.5rem;
+        }
+        
+        html.dark-mode .card h2 { color: var(--primary-color); }
+
+        /* Metadatos */
+        .project-meta {
+            display: flex; flex-wrap: wrap; gap: 12px;
+            margin-bottom: 1.8rem; font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        .meta-item {
+            background: var(--meta-bg);
+            padding: 6px 16px;
+            border-radius: 50px;
+            border: 1px solid var(--meta-border);
+            display: flex; align-items: center; gap: 6px;
+        }
+
+        /* Grid */
+        .grid-2 {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+        }
+        @media (max-width: 768px) {
+            .grid-2 { grid-template-columns: 1fr; }
+            .btn-container { flex-direction: column; }
+        }
+
+        ul.feature-list { list-style-type: none; padding: 0; }
+        ul.feature-list li { margin-bottom: 12px; padding-left: 24px; position: relative; }
+        ul.feature-list li::before {
+            content: "✔"; color: var(--secondary-color);
+            position: absolute; left: 0; font-weight: bold;
+        }
+
+        .tech-stack { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 15px; }
+        .tech-tag {
+            background-color: var(--meta-bg); 
+            color: var(--text-main);
+            border: 1px solid var(--primary-color);
+            padding: 4px 12px; border-radius: 4px; font-size: 0.85rem; font-weight: 600;
+        }
+
+        .highlight-box {
+            background-color: var(--highlight-bg);
+            border-left: 4px solid var(--secondary-color);
+            padding: 15px; margin: 20px 0;
+            color: var(--highlight-text);
+            border-radius: 0 5px 5px 0;
+            font-size: 0.95rem;
+        }
+
+        /* Botones */
+        .btn-container {
+            display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;
+            margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--meta-border);
+        }
+
+        .btn {
+            padding: 12px 28px; border-radius: 6px;
+            text-decoration: none; font-weight: 600;
+            transition: all 0.3s ease; display: inline-flex;
+            align-items: center; gap: 8px; cursor: pointer;
+            border: none; font-size: 1rem; font-family: inherit;
+        }
+
+        .btn-back { background-color: var(--btn-back-bg); color: white; }
+        .btn-back:hover { background-color: var(--btn-back-hover); transform: translateY(-2px); }
+
+        /* Botón ZIP */
+        .btn-zip {
+            background-color: var(--primary-color); color: white;
+        }
+        .btn-zip:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(21, 101, 192, 0.4);
+        }
+
+        /* Botón PKT */
+        .btn-pkt {
+            background-color: var(--secondary-color); color: white;
+        }
+        .btn-pkt:hover {
+            background-color: #1b5e20;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.4);
+        }
+
+        .error-msg {
+            color: var(--secondary-color); /* Usamos verde/rojo según contexto, aquí error genérico */
+            color: #d32f2f;
+            font-weight: bold;
+            margin-top: 15px;
+            display: none;
+            font-size: 0.9rem;
+            background: rgba(211, 47, 47, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #d32f2f;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <button id="theme-toggle" class="theme-toggle-btn" title="Cambiar Tema">🌙</button>
+
+        <div class="container" style="margin-top: 0; margin-bottom: 0; padding-bottom: 2rem;">
+            <h1>Examen Final: Consultores Chiriquí S.A.</h1>
+            <p>Plataforma de Vacantes, Facturación Digital y Red WAN Replicada</p>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <div class="card">
+            <div class="project-meta">
+                <div class="meta-item">🎓 <strong>Profesor:</strong> Napoleón Ibarra</div>
+                <div class="meta-item">🗓️ <strong>Entrega:</strong> 20-27/11/2025</div>
+                <div class="meta-item">💼 <strong>Cliente:</strong> Consultores Chiriquí S.A.</div>
+                <div class="meta-item">📊 <strong>Modelo:</strong> Pago por Interacción</div>
+            </div>
+
+            <h2>Descripción del Proyecto Final</h2>
+            <p>
+                Desarrollo de una solución tecnológica integral para una firma de consultoría en Recursos Humanos. El sistema consiste en un portal web de alta disponibilidad que gestiona vacantes de empresas públicas y privadas. La innovación principal es el modelo de negocio basado en <strong>"peaje digital"</strong>: un Chatbot inteligente rastrea las interacciones de los postulantes y el sistema genera facturación automática (simulación DGI) para las empresas clientes.
+            </p>
+            
+            <div class="highlight-box">
+                <strong>Infraestructura Crítica:</strong> Base de Datos Distribuida con Replicación Maestro-Esclavo entre Chiriquí (Plaza Las Lomas) y Panamá (Ciudad del Saber), asegurando balanceo de carga y tolerancia a fallos.
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="card">
+                <h2>Módulos de Software</h2>
+                <ul class="feature-list">
+                    <li><strong>Portal de Empresas:</strong> Registro, Contratos Digitales y CRUD de Vacantes.</li>
+                    <li><strong>Chatbot Analítico:</strong> Guía al usuario y contabiliza interacciones para cobro (Peaje).</li>
+                    <li><strong>Facturación DGI:</strong> Módulo de simulación fiscal para generar facturas basadas en métricas.</li>
+                    <li><strong>Dashboard Consultora:</strong> Estadísticas de tráfico y gestión de cobros.</li>
+                    <li><strong>Acceso Público:</strong> Visualización de vacantes sin registro de CV.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>Infraestructura de Red (WAN)</h2>
+                <ul class="feature-list">
+                    <li><strong>Sede A (Chiriquí):</strong> Servidor Primario en Plaza Las Lomas.</li>
+                    <li><strong>Sede B (Panamá):</strong> Datacenter TYGO (Ciudad del Saber) con Réplica.</li>
+                    <li><strong>Conectividad:</strong> Enlace ISP TYGO simulado con Routers y Switches L3.</li>
+                    <li><strong>Base de Datos:</strong> Configuración Master-Slave (Relacional Externa).</li>
+                    <li><strong>Servidor Web:</strong> APACHE / NGINX con Balanceo de Carga.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Tecnologías Utilizadas</h2>
+            <div class="tech-stack">
+                <span class="tech-tag">PHP / Laravel</span>
+                <span class="tech-tag">MySQL Replication</span>
+                <span class="tech-tag">NGINX Load Balancer</span>
+                <span class="tech-tag">Cisco Packet Tracer</span>
+                <span class="tech-tag">Chatbot Logic</span>
+                <span class="tech-tag">HTML5 / CSS3</span>
+            </div>
+        </div>
+
+        <div class="card" style="text-align: center;">
+            <h2>Descarga de Entregables</h2>
+            <p>Descargue el código fuente completo del portal y la simulación de red WAN.</p>
+
+            <div class="btn-container">
+                <button onclick="descargarArchivo('zip')" class="btn btn-zip">
+                    <span style="font-size: 1.2rem;">📦</span> Proyecto Web (.zip)
+                </button>
+
+                <button onclick="descargarArchivo('pkt')" class="btn btn-pkt">
+                    <span style="font-size: 1.2rem;">🌐</span> Red WAN (.pkt)
+                </button>
+
+                <a href="../proyectos.html" class="btn btn-back">
+                    <span>←</span> Volver al Portafolio
+                </a>
+            </div>
+            
+            <div id="error-msg" class="error-msg">⚠️ Error: Archivo no encontrado. Verifique 'proyecto10.zip' o 'proyecto10.pkt' en el servidor.</div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- MODO OSCURO ---
+        const themeBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        if (htmlElement.classList.contains('dark-mode')) {
+            themeBtn.innerText = '☀️';
+        }
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.body.classList.add('animate-transition');
+            }, 100);
+        });
+
+        themeBtn.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark-mode');
+            let theme = 'light';
+            if (htmlElement.classList.contains('dark-mode')) {
+                theme = 'dark';
+                themeBtn.innerText = '☀️';
+            } else {
+                themeBtn.innerText = '🌙';
+            }
+            localStorage.setItem('theme', theme);
+        });
+
+        // --- LÓGICA DE DESCARGA ---
+        async function descargarArchivo(tipo) {
+            const errorMsg = document.getElementById('error-msg');
+            errorMsg.style.display = 'none'; 
+
+            let rutas = [];
+            let extension = '';
+
+            if (tipo === 'zip') {
+                // Nombres probables para el código fuente
+                rutas = ['proyecto10.zip', 'ExamenFinal.zip', 'consultores_chiriqui.zip', 'portal_empleo.zip'];
+                extension = '.zip';
+            } else if (tipo === 'pkt') {
+                // Nombres probables para la simulación de red
+                rutas = [
+                    'proyecto10.pkt', 
+                    'red_final.pkt', 
+                    'diagrama_wan.pkt',
+                    'chiriqui_panama.pkt'
+                ];
+                extension = '.pkt';
+            }
+            
+            let archivoEncontrado = false;
+
+            for (const ruta of rutas) {
+                try {
+                    const response = await fetch(ruta, { method: 'HEAD' });
+                    if (response.ok) {
+                        const link = document.createElement('a');
+                        link.href = ruta;
+                        link.download = ruta;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        
+                        archivoEncontrado = true;
+                        break; 
+                    }
+                } catch (error) { console.log(`Check fallido para ${ruta}`); }
+            }
+
+            if (!archivoEncontrado) {
+                errorMsg.style.display = 'block';
+                errorMsg.innerText = `⚠️ No se encontró el archivo ${extension}. Asegúrese de subirlo como 'proyecto10${extension}'.`;
+            }
+        }
+    </script>
+
+</body>
+</html>

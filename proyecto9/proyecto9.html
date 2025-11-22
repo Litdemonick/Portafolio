@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto 9: Sistema de Mantenimiento NIBARRA | Portafolio</title>
+    
+    <script src="../scripts/protect.js" defer></script>
+
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+
+    <style>
+        :root {
+            /* Colores Base (Tema Industrial/Mantenimiento - Slate & Safety Orange) */
+            --primary-color: #37474f; /* Slate Grey */
+            --primary-dark: #102027;
+            --secondary-color: #ff6f00; /* Safety Orange */
+            --accent-color: #0277bd; /* Tech Blue */
+            --status-todo: #cfd8dc;
+            --status-progress: #ffe082;
+            --status-done: #a5d6a7;
+            
+            /* Variables de Tema */
+            --bg-body: #eceff1;
+            --bg-card: #ffffff;
+            --text-main: #263238;
+            --text-muted: #546e7a;
+            --text-header: #ffffff;
+            --meta-bg: #cfd8dc;
+            --meta-border: #b0bec5;
+            --card-shadow: 0 4px 20px rgba(55, 71, 79, 0.15);
+            --highlight-bg: #fff8e1;
+            --highlight-text: #ff6f00;
+            --btn-back-bg: #455a64;
+            --btn-back-hover: #263238;
+        }
+
+        /* MODO OSCURO */
+        html.dark-mode {
+            --primary-color: #546e7a;
+            --primary-dark: #1c262c;
+            --secondary-color: #ffca28;
+            --accent-color: #4fc3f7;
+            --bg-body: #121212;
+            --bg-card: #1e1e1e;
+            --text-main: #eceff1;
+            --text-muted: #b0bec5;
+            --meta-bg: #263238;
+            --meta-border: #37474f;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+            --highlight-bg: #263238;
+            --highlight-text: #ffca28;
+            --btn-back-bg: #37474f;
+            --btn-back-hover: #102027;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--bg-body);
+            margin: 0; padding: 0;
+        }
+
+        body.animate-transition {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease;
+            border-top: 5px solid var(--secondary-color);
+        }
+        
+        .card:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+            color: var(--text-header);
+            padding: 3rem 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        header h1 { margin: 0; font-size: 2.2rem; font-weight: 700; letter-spacing: 0.5px; }
+        header p { font-size: 1.1rem; opacity: 0.9; margin-top: 10px; font-weight: 400; }
+
+        .theme-toggle-btn {
+            position: absolute;
+            top: 20px; right: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        .theme-toggle-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Contenedor */
+        .container {
+            max-width: 1000px;
+            margin: -40px auto 2rem auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .card h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--meta-border);
+            padding-bottom: 10px; margin-top: 0;
+            font-size: 1.5rem;
+        }
+        
+        html.dark-mode .card h2 { color: var(--secondary-color); }
+
+        /* Metadatos */
+        .project-meta {
+            display: flex; flex-wrap: wrap; gap: 12px;
+            margin-bottom: 1.8rem; font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        .meta-item {
+            background: var(--meta-bg);
+            padding: 6px 16px;
+            border-radius: 4px;
+            border: 1px solid var(--meta-border);
+            display: flex; align-items: center; gap: 6px;
+        }
+
+        /* Grid */
+        .grid-2 {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+        }
+        @media (max-width: 768px) {
+            .grid-2 { grid-template-columns: 1fr; }
+            .btn-container { flex-direction: column; }
+        }
+
+        ul.feature-list { list-style-type: none; padding: 0; }
+        ul.feature-list li { margin-bottom: 12px; padding-left: 24px; position: relative; }
+        ul.feature-list li::before {
+            content: "🔧"; color: var(--secondary-color);
+            position: absolute; left: 0; font-weight: bold;
+        }
+
+        .tech-stack { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 15px; }
+        .tech-tag {
+            background-color: var(--meta-bg); 
+            color: var(--text-main);
+            border: 1px solid var(--primary-color);
+            padding: 4px 10px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;
+        }
+        html.dark-mode .tech-tag {
+            border-color: var(--secondary-color);
+        }
+
+        .highlight-box {
+            background-color: var(--highlight-bg);
+            border-left: 4px solid var(--secondary-color);
+            padding: 15px; margin: 20px 0;
+            color: var(--text-main);
+            border-radius: 0 5px 5px 0;
+            font-size: 0.95rem;
+        }
+
+        /* Botones */
+        .btn-container {
+            display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;
+            margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--meta-border);
+        }
+
+        .btn {
+            padding: 12px 28px; border-radius: 5px;
+            text-decoration: none; font-weight: 600;
+            transition: all 0.3s ease; display: inline-flex;
+            align-items: center; gap: 8px; cursor: pointer;
+            border: none; font-size: 1rem; font-family: inherit;
+        }
+
+        .btn-back { background-color: var(--btn-back-bg); color: white; }
+        .btn-back:hover { background-color: var(--btn-back-hover); transform: translateY(-2px); }
+
+        /* Botón ZIP */
+        .btn-zip {
+            background-color: var(--primary-color); color: white;
+        }
+        .btn-zip:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(55, 71, 79, 0.4);
+        }
+
+        /* Botón PKT */
+        .btn-pkt {
+            background-color: var(--secondary-color); color: white;
+        }
+        .btn-pkt:hover {
+            background-color: #ef6c00;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 111, 0, 0.4);
+        }
+
+        .error-msg {
+            color: var(--error-color); /* Usamos el rojo definido por defecto o podríamos definir uno específico */
+            font-weight: bold;
+            margin-top: 15px;
+            display: none;
+            font-size: 0.9rem;
+            background: rgba(255, 0, 0, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <button id="theme-toggle" class="theme-toggle-btn" title="Cambiar Tema">🌙</button>
+
+        <div class="container" style="margin-top: 0; margin-bottom: 0; padding-bottom: 2rem;">
+            <h1>Sistema de Mantenimiento: NIBARRA</h1>
+            <p>Gestión de Equipos, Tablero Kanban y Red WAN Interprovincial</p>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <div class="card">
+            <div class="project-meta">
+                <div class="meta-item">👨‍🏫 <strong>Profesor:</strong> Napoleón Ibarra</div>
+                <div class="meta-item">📅 <strong>Entrega:</strong> 11/11/2025</div>
+                <div class="meta-item">🏢 <strong>Cliente:</strong> PYME NIBARRA</div>
+                <div class="meta-item">🤖 <strong>Extra:</strong> ChatBot Integrado</div>
+            </div>
+
+            <h2>Resumen del Examen Parcial</h2>
+            <p>
+                Este proyecto consiste en el desarrollo de una solución web integral para la gestión de mantenimiento de equipos de la PYME "NIBARRA". El sistema implementa un flujo de trabajo completo desde el ingreso del equipo hasta su salida, gestionado mediante un tablero de estados. Además, se simula una infraestructura de red WAN conectando la sede operativa en Chiriquí con el Datacenter en Panamá.
+            </p>
+            
+            <div class="highlight-box">
+                <strong>Funcionalidad Clave:</strong> Sistema CRUD con replicación de Base de Datos (Local -> Servidor Remoto) y un tablero de mantenimiento visual (Kanban) dividido en: Por Hacer, En Espera de Material, En Revisión y Terminada.
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="card">
+                <h2>Módulos de Software</h2>
+                <ul class="feature-list">
+                    <li><strong>Gestión de Equipos:</strong> CRUD completo con seguimiento de historial (Tabla 1).</li>
+                    <li><strong>Tablero Kanban:</strong> Visualización de tareas por estado con barra de progreso porcentual.</li>
+                    <li><strong>Calendario:</strong> Agenda mensual de mantenimientos programados.</li>
+                    <li><strong>ChatBot:</strong> Asistente virtual integrado en la interfaz.</li>
+                    <li><strong>Seguridad:</strong> Login de acceso y protección de código fuente.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>Infraestructura de Red (WAN)</h2>
+                <ul class="feature-list">
+                    <li><strong>Ubicación A (David):</strong> Prototipo de desarrollo (Las Lomas).</li>
+                    <li><strong>Ubicación B (Panamá):</strong> Servidor de Base de Datos en Datacenter.</li>
+                    <li><strong>Conectividad:</strong> Simulación en Cisco Packet Tracer usando Routers/Switch L3.</li>
+                    <li><strong>Replicación:</strong> Sincronización de datos entre sedes geográficamente distantes.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Tecnologías Utilizadas</h2>
+            <div class="tech-stack">
+                <span class="tech-tag">PHP / MySQL</span>
+                <span class="tech-tag">JavaScript (Kanban/Calendar)</span>
+                <span class="tech-tag">CSS3 Grid/Flexbox</span>
+                <span class="tech-tag">Cisco Packet Tracer</span>
+                <span class="tech-tag">ChatBot API</span>
+                <span class="tech-tag">Replicación DB</span>
+            </div>
+        </div>
+
+        <div class="card" style="text-align: center;">
+            <h2>Descarga de Entregables</h2>
+            <p>Obtenga el código fuente del sistema web y la simulación de red en Packet Tracer.</p>
+
+            <div class="btn-container">
+                <button onclick="descargarArchivo('zip')" class="btn btn-zip">
+                    <span style="font-size: 1.2rem;">📦</span> Sistema Web (.zip)
+                </button>
+
+                <button onclick="descargarArchivo('pkt')" class="btn btn-pkt">
+                    <span style="font-size: 1.2rem;">🌐</span> Simulación Red (.pkt)
+                </button>
+
+                <a href="../proyectos.html" class="btn btn-back">
+                    <span>←</span> Volver al Portafolio
+                </a>
+            </div>
+            
+            <div id="error-msg" class="error-msg">⚠️ Error: Archivo no encontrado. Verifique que 'proyecto9.zip' o 'proyecto9.pkt' estén en el servidor.</div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- MODO OSCURO ---
+        const themeBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        if (htmlElement.classList.contains('dark-mode')) {
+            themeBtn.innerText = '☀️';
+        }
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.body.classList.add('animate-transition');
+            }, 100);
+        });
+
+        themeBtn.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark-mode');
+            let theme = 'light';
+            if (htmlElement.classList.contains('dark-mode')) {
+                theme = 'dark';
+                themeBtn.innerText = '☀️';
+            } else {
+                themeBtn.innerText = '🌙';
+            }
+            localStorage.setItem('theme', theme);
+        });
+
+        // --- LÓGICA DE DESCARGA ---
+        async function descargarArchivo(tipo) {
+            const errorMsg = document.getElementById('error-msg');
+            errorMsg.style.display = 'none'; 
+
+            let rutas = [];
+            let extension = '';
+
+            if (tipo === 'zip') {
+                // Nombres probables para el código fuente
+                rutas = ['proyecto9.zip', 'ExamenParcial2.zip', 'sistema_nibarra.zip', 'mantenimiento_web.zip'];
+                extension = '.zip';
+            } else if (tipo === 'pkt') {
+                // Nombres probables para la simulación de red
+                rutas = [
+                    'proyecto9.pkt', 
+                    'red_wan_nibarra.pkt', 
+                    'examen_parcial2_red.pkt',
+                    'simulacion_wan.pkt'
+                ];
+                extension = '.pkt';
+            }
+            
+            let archivoEncontrado = false;
+
+            for (const ruta of rutas) {
+                try {
+                    const response = await fetch(ruta, { method: 'HEAD' });
+                    if (response.ok) {
+                        const link = document.createElement('a');
+                        link.href = ruta;
+                        link.download = ruta;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        
+                        archivoEncontrado = true;
+                        break; 
+                    }
+                } catch (error) { console.log(`Check fallido para ${ruta}`); }
+            }
+
+            if (!archivoEncontrado) {
+                errorMsg.style.display = 'block';
+                errorMsg.innerText = `⚠️ No se encontró el archivo ${extension}. Asegúrese de subirlo con el nombre correcto (ej: proyecto9${extension}).`;
+            }
+        }
+    </script>
+
+</body>
+</html>

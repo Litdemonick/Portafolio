@@ -106,6 +106,7 @@ nav {
     justify-content: center;
     align-items: center;
     text-align: center;
+    padding-top: 80px; /* Espacio para el header */
     position: relative;
     background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
     background-size: 30px 30px; /* Patrón geométrico sutil */
@@ -164,4 +165,70 @@ footer {
     .hamburger {
         display: block; /* Mostrar hamburguesa */
     }
+}
+
+/* HERO TERMINAL ANIMATION */
+.hero-terminal {
+    position: relative; /* Cambiado de absolute */
+    width: 550px; /* Ancho ajustado */
+    max-width: 95%;
+    margin: 2.5rem auto 0; /* Margen para separarlo del texto superior */
+    background-color: rgba(20, 20, 20, 0.9);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    font-family: var(--font-code);
+    font-size: 0.85rem;
+    overflow: hidden;
+}
+
+.terminal-header {
+    background-color: #333;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.terminal-buttons { display: flex; gap: 6px; }
+.dot { height: 12px; width: 12px; border-radius: 50%; }
+.red { background-color: #ff5f56; }
+.yellow { background-color: #ffbd2e; }
+.green { background-color: #27c93f; }
+
+.terminal-title {
+    color: #ccc;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.terminal-body {
+    padding: 15px;
+    color: #ddd;
+    line-height: 1.6;
+    text-align: left; /* Alinear texto a la izquierda */
+}
+
+.terminal-body p {
+    margin: 0;
+}
+
+.cursor {
+    display: inline-block;
+    background-color: var(--primary-color);
+    width: 10px;
+    height: 1.2em;
+    vertical-align: middle;
+    animation: blink 1s infinite;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }

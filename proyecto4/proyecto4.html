@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto 4: Seguridad y Desarrollo Web | Portafolio</title>
+    
+    <script src="../scripts/protect.js" defer></script>
+
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+
+    <style>
+        :root {
+            /* Colores Base (Tema Ciberseguridad - Morado/Cian) */
+            --primary-color: #6f42c1; /* Morado Institucional/Tech */
+            --primary-dark: #452c7a;
+            --accent-color: #0dcaf0; /* Cian brillante para detalles */
+            --accent-hover: #0aa2c0;
+            --error-color: #dc3545;
+            --terminal-bg: #212529; /* Fondo tipo consola */
+            
+            /* Variables de Tema */
+            --bg-body: #f3f4f6;
+            --bg-card: #ffffff;
+            --text-main: #2d3748;
+            --text-muted: #718096;
+            --text-header: #ffffff;
+            --meta-bg: #f7fafc;
+            --meta-border: #e2e8f0;
+            --card-shadow: 0 4px 20px rgba(111, 66, 193, 0.1); /* Sombra morada suave */
+            --highlight-bg: #e9ecef;
+            --highlight-text: #2d3748;
+            --btn-back-bg: #4a5568;
+            --btn-back-hover: #2d3748;
+        }
+
+        /* MODO OSCURO (Estilo Hacker/Terminal) */
+        html.dark-mode {
+            --primary-color: #9f7aea; /* Morado más claro */
+            --primary-dark: #1a1a2e;
+            --bg-body: #0f0f12; /* Casi negro */
+            --bg-card: #1a1a20;
+            --text-main: #e2e8f0;
+            --text-muted: #a0aec0;
+            --meta-bg: #2d3748;
+            --meta-border: #4a5568;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+            --highlight-bg: #23232e;
+            --highlight-text: #0dcaf0; /* Texto cian en cajas */
+            --btn-back-bg: #2d3748;
+            --btn-back-hover: #171923;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--bg-body);
+            margin: 0; padding: 0;
+        }
+
+        body.animate-transition {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            border-top: 4px solid transparent;
+        }
+        
+        .card:hover {
+            transform: translateY(-3px);
+            border-top-color: var(--accent-color); /* Detalle al hover */
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+            color: var(--text-header);
+            padding: 3rem 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Efecto de red/tech en el header (opcional, sutil) */
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 20%),
+                              radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 20%);
+            pointer-events: none;
+        }
+
+        header h1 { margin: 0; font-size: 2.4rem; font-weight: 700; letter-spacing: 0.5px; }
+        header p { font-size: 1.1rem; opacity: 0.9; margin-top: 10px; font-weight: 300; }
+
+        .theme-toggle-btn {
+            position: absolute;
+            top: 20px; right: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        .theme-toggle-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(15deg);
+        }
+
+        /* Contenedor */
+        .container {
+            max-width: 1000px;
+            margin: -40px auto 2rem auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .card h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--meta-border);
+            padding-bottom: 10px; margin-top: 0;
+            font-size: 1.5rem;
+        }
+        
+        html.dark-mode .card h2 { color: var(--accent-color); }
+
+        /* Metadatos */
+        .project-meta {
+            display: flex; flex-wrap: wrap; gap: 12px;
+            margin-bottom: 1.8rem; font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        .meta-item {
+            background: var(--meta-bg);
+            padding: 6px 16px;
+            border-radius: 6px;
+            border: 1px solid var(--meta-border);
+            display: flex; align-items: center; gap: 6px;
+        }
+
+        /* Grid */
+        .grid-2 {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+        }
+        @media (max-width: 768px) {
+            .grid-2 { grid-template-columns: 1fr; }
+            .btn-container { flex-direction: column; }
+        }
+
+        ul.feature-list { list-style-type: none; padding: 0; }
+        ul.feature-list li { margin-bottom: 12px; padding-left: 24px; position: relative; }
+        ul.feature-list li::before {
+            content: "➢"; color: var(--accent-color);
+            position: absolute; left: 0; font-weight: bold;
+        }
+
+        .tech-stack { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 15px; }
+        .tech-tag {
+            background-color: var(--meta-bg); 
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            padding: 4px 10px; border-radius: 4px; font-size: 0.85rem; font-weight: 600;
+        }
+        html.dark-mode .tech-tag {
+            background-color: rgba(13, 202, 240, 0.1);
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        .highlight-box {
+            background-color: var(--highlight-bg);
+            border-left: 4px solid var(--primary-color);
+            padding: 15px; margin: 20px 0;
+            font-style: italic; color: var(--highlight-text);
+            border-radius: 0 6px 6px 0;
+            font-family: 'Consolas', 'Monaco', monospace; /* Fuente mono para código/logs */
+            font-size: 0.95rem;
+        }
+
+        /* Botones */
+        .btn-container {
+            display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;
+            margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--meta-border);
+        }
+
+        .btn {
+            padding: 12px 28px; border-radius: 6px;
+            text-decoration: none; font-weight: 600;
+            transition: all 0.3s ease; display: inline-flex;
+            align-items: center; gap: 8px; cursor: pointer;
+            border: none; font-size: 1rem; font-family: inherit;
+        }
+
+        .btn-back { background-color: var(--btn-back-bg); color: white; }
+        .btn-back:hover { background-color: var(--btn-back-hover); transform: translateY(-2px); }
+
+        .btn-download {
+            background-color: var(--primary-color); color: white;
+            box-shadow: 0 4px 6px rgba(111, 66, 193, 0.25);
+        }
+        .btn-download:hover {
+            background-color: var(--primary-dark); 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(111, 66, 193, 0.4);
+        }
+
+        .error-msg {
+            color: var(--error-color);
+            font-weight: bold;
+            margin-top: 15px;
+            display: none;
+            font-size: 0.9rem;
+            background: rgba(220, 53, 69, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--error-color);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <button id="theme-toggle" class="theme-toggle-btn" title="Cambiar Tema">🌙</button>
+
+        <div class="container" style="margin-top: 0; margin-bottom: 0; padding-bottom: 2rem;">
+            <h1>Seguridad Informática & Web</h1>
+            <p>Simulación de Ataque, Defensa y Desarrollo de Prototipo</p>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <div class="card">
+            <div class="project-meta">
+                <div class="meta-item">👨‍🏫 <strong>Profesor:</strong> Napoleón Ibarra</div>
+                <div class="meta-item">🗓️ <strong>Fecha:</strong> 18/09/2025</div>
+                <div class="meta-item">👥 <strong>Equipo:</strong> C. Miranda & M. Harris</div>
+                <div class="meta-item">⚖️ <strong>Evaluación:</strong> 100 Puntos</div>
+            </div>
+
+            <h2>Descripción del Proyecto</h2>
+            <p>
+                Este laboratorio integra dos componentes críticos del desarrollo de software moderno. La <strong>Parte I</strong> consiste en el desarrollo de un sitio web para la empresa estatal "JC de Las Lomas" utilizando tecnologías web nativas. La <strong>Parte II</strong> es una simulación controlada de ciberseguridad en un entorno LAN aislado (sin internet).
+            </p>
+            <p>
+                El objetivo principal fue exponer el sitio desarrollado a pruebas de penetración éticas para identificar vulnerabilidades, simular ataques de Denegación de Servicio (DoS) y documentar las medidas de mitigación necesarias.
+            </p>
+            
+            <div class="highlight-box">
+                $ sudo nmap -sS -T4 192.168.1.115 <br>
+                > Starting Nmap 7.95... <br>
+                > Host is up (0.0011s latency). PORT 80/tcp OPEN.
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="card">
+                <h2>Actividades Realizadas</h2>
+                <ul class="feature-list">
+                    <li><strong>Desarrollo Web:</strong> Prototipo funcional en HTML/ASP para la empresa JC de Las Lomas.</li>
+                    <li><strong>Reconocimiento de Red:</strong> Uso de <code>netdiscover</code> para mapeo de direcciones IP y MAC.</li>
+                    <li><strong>Escaneo de Puertos:</strong> Análisis con <strong>Nmap</strong> (SYN Scan) para detectar servicios vulnerables.</li>
+                    <li><strong>Simulación de Ataque:</strong> Ejecución de pruebas de estrés con <code>hping3</code> (SYN Flood) puerto 22/80.</li>
+                    <li><strong>Análisis de Tráfico:</strong> Captura de paquetes en tiempo real con <strong>Wireshark</strong>.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>Herramientas y Tecnologías</h2>
+                <div class="tech-stack">
+                    <span class="tech-tag">Kali Linux / Parrot OS</span>
+                    <span class="tech-tag">Wireshark</span>
+                    <span class="tech-tag">Nmap</span>
+                    <span class="tech-tag">Hping3</span>
+                    <span class="tech-tag">VirtualBox</span>
+                    <span class="tech-tag">HTML5 / ASP</span>
+                </div>
+                <p style="margin-top: 20px; font-size: 0.9rem; color: var(--text-muted);">
+                    <strong>Nota:</strong> Todas las pruebas fueron realizadas en un entorno de laboratorio controlado (Red LAN Inalámbrica) siguiendo protocolos éticos.
+                </p>
+            </div>
+        </div>
+
+        <div class="card" style="text-align: center;">
+            <h2>Informe de Laboratorio</h2>
+            <p>Accede al documento completo con el análisis de tráfico, capturas de Wireshark y conclusiones de mitigación.</p>
+
+            <div class="btn-container">
+                <button onclick="descargarInforme()" class="btn btn-download">
+                    <span style="font-size: 1.2rem;">📄</span> Ver Informe PDF
+                </button>
+
+                <a href="../proyectos.html" class="btn btn-back">
+                    <span>←</span> Volver al Portafolio
+                </a>
+            </div>
+            
+            <div id="error-msg" class="error-msg">⚠️ Error: No se encontró el archivo 'Lab2Practico.pdf' ni variantes.</div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- LÓGICA DEL MODO OSCURO ---
+        const themeBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Ajustar icono inicial
+        if (htmlElement.classList.contains('dark-mode')) {
+            themeBtn.innerText = '☀️';
+        }
+
+        // Activar transiciones al cargar
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.body.classList.add('animate-transition');
+            }, 100);
+        });
+
+        themeBtn.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark-mode');
+            let theme = 'light';
+            if (htmlElement.classList.contains('dark-mode')) {
+                theme = 'dark';
+                themeBtn.innerText = '☀️';
+            } else {
+                themeBtn.innerText = '🌙';
+            }
+            localStorage.setItem('theme', theme);
+        });
+
+        // --- LÓGICA DE DESCARGA DEL PDF ---
+        async function descargarInforme() {
+            const errorMsg = document.getElementById('error-msg');
+            errorMsg.style.display = 'none'; 
+
+            // Lista de posibles nombres para el archivo PDF
+            // Se incluye el nombre original largo y opciones cortas
+            const rutas = [
+                'Lab2Practico.pdf',
+                'Lab2Practico (Carlos Miranda y Mariam Harris).pdf',
+                'Lab2Practico (Carlos Miranda y Mariam Harris) (1).pdf',
+                'proyecto4.pdf',
+                'informe_seguridad.pdf'
+            ];
+            
+            let archivoEncontrado = false;
+
+            for (const ruta of rutas) {
+                try {
+                    // Intentamos verificar si el archivo existe con una petición HEAD
+                    const response = await fetch(ruta, { method: 'HEAD' });
+                    if (response.ok) {
+                        // Si existe, abrimos en nueva pestaña (mejor para PDFs)
+                        window.open(ruta, '_blank');
+                        archivoEncontrado = true;
+                        break; 
+                    }
+                } catch (error) { 
+                    console.log(`Intento fallido para ${ruta}`);
+                }
+            }
+
+            if (!archivoEncontrado) {
+                // Si falla HEAD (ej. servidor local simple), intentamos forzar la descarga del primero
+                // o mostramos error si preferimos ser estrictos.
+                // Aquí mostramos el error para que el usuario sepa que debe renombrar/subir el archivo.
+                errorMsg.style.display = 'block';
+                errorMsg.innerText = "⚠️ No se encontró el archivo. Asegúrate de que se llame 'Lab2Practico.pdf' o 'proyecto4.pdf'.";
+            }
+        }
+    </script>
+
+</body>
+</html>
