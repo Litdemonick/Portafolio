@@ -1,0 +1,214 @@
+/* proyecto-detalle.css */
+
+/* Estilos para el Hero (Título grande) */
+.project-hero {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8), var(--bg-color)), url('https://placehold.co/1920x600/111/333?text=Background'); /* Pon una imagen de fondo sutil aquí */
+    background-size: cover;
+    background-position: center;
+    padding: 120px 20px 60px;
+    text-align: center;
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.project-category {
+    color: var(--primary-color);
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.project-hero h1 {
+    font-size: 3rem;
+    margin: 15px 0;
+    color: var(--text-color);
+}
+
+.project-meta {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    color: #888;
+    font-size: 0.9rem;
+    flex-wrap: wrap;
+}
+
+.project-meta i {
+    color: var(--primary-color);
+    margin-right: 5px;
+}
+
+/* Contenedor del Artículo */
+.project-content {
+    padding: 40px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.intro-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    margin-bottom: 30px;
+}
+
+/* Imágenes */
+.full-width-img img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,255,157,0.1);
+}
+
+figcaption {
+    text-align: center;
+    color: #666;
+    font-size: 0.85rem;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+.divider {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+    margin: 40px 0;
+}
+
+/* Títulos internos */
+.project-content h2 {
+    font-size: 2rem;
+    color: var(--text-color);
+    margin-bottom: 20px;
+    border-left: 4px solid var(--primary-color);
+    padding-left: 15px;
+}
+
+.project-content h3 {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+/* Grid para conceptos (Agrupación/Jerarquía) */
+.grid-2-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.card-detail {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: transform 0.3s ease;
+}
+
+.card-detail:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+}
+
+.icon-box {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+/* Sección de Técnicas (Alternando imagen y texto) */
+.techniques-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.tech-item {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.tech-item.reverse {
+    flex-direction: row-reverse;
+}
+
+.tech-item img {
+    width: 50%;
+    height: auto;
+    object-fit: cover;
+}
+
+.tech-text {
+    padding: 20px;
+    width: 50%;
+}
+
+/* Botones finales */
+.download-section {
+    background: rgba(0, 255, 157, 0.1);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    margin: 50px 0;
+    border: 1px solid var(--primary-color);
+}
+
+.btn-primary, .btn-secondary {
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: #000;
+}
+
+.btn-primary:hover {
+    box-shadow: 0 0 15px var(--primary-color);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--text-color);
+    color: #000;
+}
+
+.back-btn-container {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .grid-2-col, .tech-item, .tech-item.reverse {
+        display: block;
+    }
+    
+    .tech-item img {
+        width: 100%;
+    }
+    
+    .tech-text {
+        width: 100%;
+    }
+    
+    .project-hero h1 {
+        font-size: 2rem;
+    }
+}
