@@ -1,22 +1,31 @@
 /* VARIABLES DE COLORES (Temas) */
 :root {
-    --bg-color: #0a0a0a; /* Fondo oscuro (como tu imagen 1) */
+    --primary-color: #00ff9d; /* Verde neón principal */
+    --primary-color-rgb: 0, 255, 157;
+    --accent-color: #ff00c1; /* Magenta para acentos glitch */
+    
+    --bg-color: #121212; /* Un negro más estándar para fondos */
+    --bg-secondary: #1e1e1e; /* Un gris muy oscuro para elementos secundarios */
+    --card-bg: #2a2a2a; /* Gris oscuro para tarjetas */
+    --border-color: #444444;
     --text-color: #e0e0e0;
-    --accent-color: #00ff9d; /* Un verde neón estilo 'código' */
-    --secondary-bg: #1a1a1a;
-    --card-bg: #222; /* Gris oscuro para tarjetas en modo oscuro */
-    --nav-bg: rgba(10, 10, 10, 0.9);
+    --text-color-secondary: #aaaaaa;
+    --headings-color: #ffffff;
+    --nav-bg: rgba(18, 18, 18, 0.85);
+
     --font-main: 'Poppins', sans-serif;
     --font-code: 'Fira Code', monospace;
 }
 
 [data-theme="light"] {
     --bg-color: #f4f4f4;
+    --bg-secondary: #ffffff;
+    --card-bg: #ffffff;
+    --border-color: #dddddd;
     --text-color: #333333;
-    --accent-color: #007bff; /* Azul moderno para claro */
-    --secondary-bg: #ffffff;
-    --card-bg: #ffffff; /* Blanco para tarjetas en modo claro */
-    --nav-bg: rgba(255, 255, 255, 0.9);
+    --text-color-secondary: #777777;
+    --headings-color: #111111;
+    --nav-bg: rgba(255, 255, 255, 0.85);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
@@ -51,7 +60,7 @@ nav {
 
 .logo { display: flex; align-items: center; gap: 10px; }
 .avatar { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--accent-color); }
-.dev-name { font-family: var(--font-code); font-weight: bold; color: var(--accent-color); }
+.dev-name { font-family: var(--font-code); font-weight: bold; color: var(--primary-color); }
 
 .nav-links { display: flex; list-style: none; gap: 2rem; }
 .nav-links a {
@@ -64,11 +73,16 @@ nav {
 /* Efecto Hover en enlaces */
 .nav-links a::after {
     content: '';
-    width: 0; height: 2px; background: var(--accent-color);
+    width: 0; height: 2px; background: var(--primary-color);
     position: absolute; bottom: -5px; left: 0;
     transition: width 0.3s;
 }
-.nav-links a:hover::after { width: 100%; }
+.nav-links a:hover::after, .nav-links a:focus::after { width: 100%; }
+.nav-links a.active {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+.nav-links a.active::after { width: 100%; }
 
 .controls { display: flex; gap: 1rem; align-items: center; }
 .btn-icon {
@@ -77,7 +91,13 @@ nav {
     border-radius: 5px; cursor: pointer;
     transition: transform 0.2s;
 }
-.btn-icon:hover { transform: scale(1.1); border-color: var(--accent-color); color: var(--accent-color); }
+.btn-icon:hover { transform: scale(1.1); border-color: var(--primary-color); color: var(--primary-color); }
+
+.hamburger {
+    display: none; /* Oculto por defecto */
+    font-size: 1.5rem;
+    cursor: pointer;
+}
 
 /* HERO SECTION */
 #hero {
@@ -94,7 +114,7 @@ nav {
 .hero-content h1 { font-size: 4rem; margin-bottom: 10px; }
 .hero-content h2 {
     font-family: var(--font-code);
-    color: var(--accent-color);
+    color: var(--primary-color);
     font-size: 1.5rem;
     margin-bottom: 20px;
 }
@@ -105,10 +125,10 @@ nav {
     font-weight: bold; margin: 10px; display: inline-block;
     transition: all 0.3s;
 }
-.primary { background: var(--accent-color); color: #000; }
-.primary:hover { box-shadow: 0 0 15px var(--accent-color); }
-.secondary { border: 2px solid var(--accent-color); color: var(--accent-color); }
-.secondary:hover { background: var(--accent-color); color: #000; }
+.primary { background: var(--primary-color); color: #000; }
+.primary:hover { box-shadow: 0 0 15px var(--primary-color); }
+.secondary { border: 2px solid var(--primary-color); color: var(--primary-color); }
+.secondary:hover { background: var(--primary-color); color: #000; }
 
 /* FOOTER */
 footer {
@@ -117,7 +137,7 @@ footer {
 }
 .social-icons { font-size: 1.5rem; margin-bottom: 1rem; }
 .social-icons a { color: var(--text-color); margin: 0 10px; transition: 0.3s; }
-.social-icons a:hover { color: var(--accent-color); }
+.social-icons a:hover { color: var(--primary-color); }
 
 /* ANIMACIONES */
 @keyframes fadeIn {
@@ -125,3 +145,23 @@ footer {
     to { opacity: 1; transform: translateY(0); }
 }
 .hero-content { animation: fadeIn 1.5s ease-out; }
+
+/* Estilos de Hero para páginas de detalle (modo oscuro por defecto) */
+.project-hero {
+    background: linear-gradient(rgba(18, 18, 18, 0.8), rgba(18, 18, 18, 1)), url('https://placehold.co/1200x500/1a1a1a/00ff9d?text=UI/UX+Design') no-repeat center center/cover;
+}
+
+/* Estilos de Hero para páginas de detalle (modo claro) */
+[data-theme="light"] .project-hero {
+    background: linear-gradient(rgba(244, 244, 244, 0.8), rgba(244, 244, 244, 1)), url('https://placehold.co/1200x500/e0e0e0/333?text=UI/UX+Design') no-repeat center center/cover;
+}
+
+/* Responsive para el Header */
+@media (max-width: 768px) {
+    .nav-links, .controls {
+        display: none; /* Ocultar para menú hamburguesa */
+    }
+    .hamburger {
+        display: block; /* Mostrar hamburguesa */
+    }
+}
