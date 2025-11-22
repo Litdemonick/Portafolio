@@ -3,11 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Investigación UI/UX | Carlos Miranda</title>
+    <title data-i18n="page_title_p1">Investigación UI/UX | Carlos Miranda</title>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="proyecto-detalle.css"> </head>
+    <link rel="stylesheet" href="proyecto-detalle.css">
+    <style>
+        /* Estilos para modo claro (default) */
+        body {
+            background-color: var(--bg-color, #f0f2f5);
+            color: var(--text-color, #1a1a1a);
+        }
+        .project-detail-main .card-detail {
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+        }
+        .project-detail-main .download-section {
+            background-color: #e9ecef;
+            border-left: 4px solid var(--primary-color, #00ff9d);
+        }
+        .project-detail-main .tech-item {
+            background-color: #fff;
+        }
+
+        /* Estilos para modo oscuro */
+        body.dark-mode {
+            background-color: var(--bg-color-dark, #121212);
+            color: var(--text-color-dark, #e0e0e0);
+        }
+        body.dark-mode .project-hero {
+            background: linear-gradient(rgba(18, 18, 18, 0.8), rgba(18, 18, 18, 1)), url('https://placehold.co/1200x500/1a1a1a/00ff9d?text=Fundamentos+de+Diseño+UI/UX') no-repeat center center/cover;
+        }
+        body.dark-mode .project-detail-main .card-detail {
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+        }
+        body.dark-mode .project-detail-main .download-section {
+            background-color: #2a2a2a;
+            border-left-color: var(--primary-color, #00ff9d);
+        }
+        body.dark-mode .project-detail-main .tech-item {
+            background-color: #1e1e1e;
+        }
+        body.dark-mode .project-content .divider {
+            border-color: #333;
+        }
+        body.dark-mode figcaption {
+            color: #aaa;
+        }
+        body.dark-mode .btn-secondary {
+            background-color: #333;
+            color: #f0f0f0;
+        }
+    </style>
+</head>
 <body>
 
     <header id="header">
@@ -16,10 +65,10 @@
                 <img src="assets/default.png" alt="Avatar" class="avatar"> <span class="dev-name">&lt;Carlos /&gt;</span>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="sobremi.html">Sobre mí</a></li>
-                <li><a href="proyectos.html" class="active">Proyectos</a></li>
-                <li><a href="habilidades.html">Habilidades</a></li>
+                <li><a href="index.html" data-i18n="nav_home">Inicio</a></li>
+                <li><a href="sobremi.html" data-i18n="nav_about">Sobre mí</a></li>
+                <li><a href="proyectos.html" class="active" data-i18n="nav_projects">Proyectos</a></li>
+                <li><a href="habilidades.html" data-i18n="nav_skills">Habilidades</a></li>
             </ul>
             <div class="controls">
                 <button id="lang-toggle" class="btn-icon"><span class="lang-text">ES</span><i class="fa-solid fa-language"></i></button>
@@ -32,11 +81,11 @@
     <main class="project-detail-main">
         
         <section class="project-hero">
-            <div class="hero-content">
-                <span class="project-category">Investigación Universitaria • DSW4</span>
-                <h1>Estructura y Jerarquía Visual en el Diseño</h1>
+            <div class="hero-content" style="background: url('https://placehold.co/1200x500/1a1a1a/00ff9d?text=Fundamentos+de+Diseño+UI/UX') no-repeat center center; background-size: cover;">
+                <span class="project-category" data-i18n="p1_category">Investigación Universitaria • DSW4</span>
+                <h1 data-i18n="p1_title">Estructura y Jerarquía Visual en el Diseño y sus Técnicas Aplicadas</h1>
                 <div class="project-meta">
-                    <p><i class="fa-regular fa-calendar"></i> 22 Agosto 2025</p>
+                    <p><i class="fa-regular fa-calendar"></i> <span data-i18n="p1_date">22 Agosto 2025</span></p>
                     <p><i class="fa-solid fa-users"></i> Carlos Miranda & Brayan Quintero</p>
                     <p><i class="fa-solid fa-university"></i> UTP - Facultad de Sistemas</p>
                 </div>
@@ -46,82 +95,82 @@
         <article class="project-content">
             
             <div class="content-wrapper">
-                <p class="intro-text">
+                <p class="intro-text" data-i18n="p1_intro">
                     Esta investigación aborda los fundamentos críticos para crear interfaces de usuario efectivas. Analizamos cómo la mente humana procesa la información visual y qué técnicas modernas se utilizan para estructurar aplicaciones de software intuitivas.
                 </p>
 
                 <figure class="full-width-img">
                     <img src="https://placehold.co/1200x500/1a1a1a/00ff9d?text=Fundamentos+de+Diseño+UI/UX" alt="Banner de Diseño UI/UX">
-                    <figcaption>Estructura visual aplicada al desarrollo de software.</figcaption>
+                    <figcaption data-i18n="p1_fig1_caption">Estructura visual aplicada al desarrollo de software.</figcaption>
                 </figure>
 
                 <hr class="divider">
 
-                <h2>1. Estructura y Jerarquía Visual</h2>
-                <p>El diseño no es solo estética; es comunicación. Para que una interfaz funcione, debe guiar al usuario sin esfuerzo a través del contenido.</p>
+                <h2 data-i18n="p1_h2_1">1. Estructura y Jerarquía Visual</h2>
+                <p data-i18n="p1_p1">El diseño no es solo estética; es comunicación. Para que una interfaz funcione, debe guiar al usuario sin esfuerzo a través del contenido.</p>
 
                 <div class="grid-2-col">
                     <div class="card-detail">
                         <div class="icon-box"><i class="fa-solid fa-layer-group"></i></div>
-                        <h3>Agrupación de Elementos</h3>
-                        <p>Basado en los principios de la Gestalt, los elementos relacionados deben estar visualmente próximos. Esto reduce la carga cognitiva y ayuda al usuario a entender qué controles pertenecen a qué función.</p>
+                        <h3 data-i18n="p1_card1_title">Agrupación de Elementos</h3>
+                        <p data-i18n="p1_card1_desc">Basado en los principios de la Gestalt, los elementos relacionados deben estar visualmente próximos. Esto reduce la carga cognitiva y ayuda al usuario a entender qué controles pertenecen a qué función.</p>
                     </div>
                     <div class="card-detail">
                         <div class="icon-box"><i class="fa-solid fa-list-ol"></i></div>
-                        <h3>Jerarquía Visual</h3>
-                        <p>Utilizamos tamaño, color, contraste y tipografía para indicar la importancia. Un título grande (H1) atrae la vista primero; un texto gris y pequeño pasa a segundo plano.</p>
+                        <h3 data-i18n="p1_card2_title">Jerarquía Visual</h3>
+                        <p data-i18n="p1_card2_desc">Utilizamos tamaño, color, contraste y tipografía para indicar la importancia. Un título grande (H1) atrae la vista primero; un texto gris y pequeño pasa a segundo plano.</p>
                     </div>
                 </div>
 
                 <figure class="content-img right-float">
                     <img src="https://placehold.co/400x300/222/fff?text=Ejemplo+Jerarquía" alt="Ejemplo de Jerarquía Visual">
-                    <figcaption>Comparación de buena vs mala jerarquía.</figcaption>
+                    <figcaption data-i18n="p1_fig2_caption">Comparación de buena vs mala jerarquía.</figcaption>
                 </figure>
 
-                <h3>El Poder del Espacio en Blanco</h3>
-                <p>El espacio negativo (o blanco) no es espacio vacío; es un elemento activo de diseño. Permite que el contenido "respire", mejora la legibilidad y separa secciones lógicas sin necesidad de usar líneas divisorias pesadas.</p>
+                <h3 data-i18n="p1_h3_1">El Poder del Espacio en Blanco</h3>
+                <p data-i18n="p1_p2">El espacio negativo (o blanco) no es espacio vacío; es un elemento activo de diseño. Permite que el contenido "respire", mejora la legibilidad y separa secciones lógicas sin necesidad de usar líneas divisorias pesadas.</p>
 
                 <hr class="divider">
 
-                <h2>2. Técnicas Empleadas en el Diseño</h2>
-                <p>Para llevar la teoría a la práctica, utilizamos metodologías estandarizadas en la industria del desarrollo de software.</p>
+                <h2 data-i18n="p1_h2_2">2. Técnicas Empleadas en el Diseño</h2>
+                <p data-i18n="p1_p3">Para llevar la teoría a la práctica, utilizamos metodologías estandarizadas en la industria del desarrollo de software.</p>
 
                 <div class="techniques-container">
                     
                     <div class="tech-item">
                         <img src="https://placehold.co/600x300/333/00ff9d?text=Card+Sorting" alt="Card Sorting">
                         <div class="tech-text">
-                            <h3>Categorización en Tarjetas (Card Sorting)</h3>
-                            <p>Una técnica de investigación de usuarios donde los participantes organizan temas en categorías que tienen sentido para ellos. Es fundamental para diseñar la arquitectura de información y los menús de navegación.</p>
+                            <h3 data-i18n="p1_tech1_title">Categorización en Tarjetas (Card Sorting)</h3>
+                            <p data-i18n="p1_tech1_desc">Una técnica de investigación de usuarios donde los participantes organizan temas en categorías que tienen sentido para ellos. Es fundamental para diseñar la arquitectura de información y los menús de navegación.</p>
                         </div>
                     </div>
 
                     <div class="tech-item reverse">
                         <img src="https://placehold.co/600x300/333/00ff9d?text=Wireframing" alt="Wireframe">
                         <div class="tech-text">
-                            <h3>Wireframing (Esquematización)</h3>
-                            <p>El "plano arquitectónico" de la aplicación. Son bocetos de baja fidelidad que definen la estructura y el flujo sin distraerse con colores o imágenes. Permite iterar rápido antes de escribir código.</p>
+                            <h3 data-i18n="p1_tech2_title">Wireframing (Esquematización)</h3>
+                            <p data-i18n="p1_tech2_desc">El "plano arquitectónico" de la aplicación. Son bocetos de baja fidelidad que definen la estructura y el flujo sin distraerse con colores o imágenes. Permite iterar rápido antes de escribir código.</p>
                         </div>
                     </div>
 
                     <div class="tech-item">
                         <img src="https://placehold.co/600x300/333/00ff9d?text=Prototipado" alt="Prototipado">
                         <div class="tech-text">
-                            <h3>Prototipado</h3>
-                            <p>Modelos interactivos de alta o media fidelidad que simulan el funcionamiento final de la aplicación. Permiten realizar pruebas de usabilidad antes de la fase de desarrollo.</p>
+                            <h3 data-i18n="p1_tech3_title">Prototipado</h3>
+                            <p data-i18n="p1_tech3_desc">Modelos interactivos de alta o media fidelidad que simulan el funcionamiento final de la aplicación. Permiten realizar pruebas de usabilidad antes de la fase de desarrollo.</p>
                         </div>
                     </div>
 
                 </div>
 
                 <div class="download-section">
-                    <h3><i class="fa-solid fa-file-pdf"></i> Documentación Original</h3>
-                    <p>Puedes leer el trabajo de investigación completo presentado en la Universidad Tecnológica de Panamá aquí:</p>
-                    <a href="#" class="btn-primary">Descargar PDF Completo</a>
+                    <h3 data-i18n="p1_download_title"><i class="fa-solid fa-file-pdf"></i> Documentación Original</h3>
+                    <p data-i18n="p1_download_desc">Puedes leer el trabajo de investigación completo presentado en la Universidad Tecnológica de Panamá aquí:</p>
+                    <a href="proyecto1/Investigación 1 DSW4 (Carlos Miranda y Brayan Quintero).pdf" target="_blank" class="btn-primary" data-i18n="p1_download_btn">Descargar PDF Completo</a>
                 </div>
 
                 <div class="back-btn-container">
-                    <a href="proyectos.html" class="btn-secondary"><i class="fa-solid fa-arrow-left"></i> Volver a Proyectos</a>
+                    <a href="proyectos.html" class="btn-secondary" data-i18n="p1_back_btn"><i class="fa-solid fa-arrow-left"></i> Volver a Proyectos</a>
                 </div>
 
             </div>
@@ -134,7 +183,7 @@
             <a href="#" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
             <a href="#" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
         </div>
-        <p>&copy; 2025 Carlos Miranda. Todos los derechos reservados.</p>
+        <p>&copy; 2025 Carlos Miranda. <span data-i18n="footer_rights">Todos los derechos reservados.</span></p>
     </footer>
 
     <script src="script.js"></script>
