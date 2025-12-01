@@ -26,6 +26,8 @@ script.js
 scripts2.js
 sobremi.html
 
+.gitignore
+
 # Si la carpeta 'assets' también tiene contenido que es el 
 # resultado del despliegue y no quieres versionar, puedes añadirla también:
 # /assets/ 
