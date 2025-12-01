@@ -11,8 +11,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="habilidades.style.css">
+
     <style>
-        /* Quita el subrayado y color azul de los enlaces */
+        /* Quita el subrayado y color azul de los enlaces de las tarjetas */
         a.skill-card,
         a.skill-card:hover,
         a.skill-card:visited,
@@ -21,15 +22,51 @@
             color: inherit !important;
         }
 
-        /* Ajuste para que el SVG de Cisco se vea del mismo tamaño que los iconos de FontAwesome */
+        /* Ajuste base para el SVG de Cisco */
         .cisco-svg {
             width: 1em;
             height: 1em;
             font-size: 3rem;
-            /* Tamaño aproximado de los iconos */
+            /* Tamaño aproximado para igualar a FontAwesome */
             fill: currentColor;
-            /* Toma el color del tema */
+            /* Toma el color del texto del tema */
             margin-bottom: 10px;
+            transition: all 0.3s ease;
+            /* Suaviza transiciones normales */
+        }
+
+        /* Definición de la animación de temblor para el SVG */
+        @keyframes tremble-svg {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            20% {
+                transform: translate(-2px, 2px);
+            }
+
+            40% {
+                transform: translate(2px, -2px);
+            }
+
+            60% {
+                transform: translate(-2px, -2px);
+            }
+
+            80% {
+                transform: translate(2px, 2px);
+            }
+
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
+        /* Aplicar la animación de temblor al SVG cuando se hace HOVER en la tarjeta */
+        a.skill-card:hover .cisco-svg {
+            animation: tremble-svg 0.2s linear infinite;
+            /* Se añade un ligero filtro para simular el efecto de "glitch" de los otros iconos */
+            filter: drop-shadow(1px 1px 0px rgba(255, 0, 0, 0.5)) drop-shadow(-1px -1px 0px rgba(0, 0, 255, 0.5));
         }
     </style>
     <script src="scripts/protect.js" defer></script>
