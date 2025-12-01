@@ -1,5 +1,4 @@
-
-# 🌟 Portafolio Personal - <Carlos Miranda>
+# 🌟 Portafolio Personal - Carlos Miranda
 
 ¡Bienvenido/a a mi espacio digital!
 
