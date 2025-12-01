@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto 6: Sucesos y Más & Servidor Linux | Portafolio</title>
+    
+    <script src="../scripts/protect.js" defer></script>
+
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+
+    <style>
+        :root {
+            /* Colores Base (Tema Ubuntu/Linux/PHP) */
+            --primary-color: #E95420; /* Ubuntu Orange */
+            --primary-dark: #772953; /* Ubuntu Aubergine */
+            --secondary-color: #777BB4; /* PHP Purple tone */
+            --accent-color: #aea79f; /* Warm Grey */
+            --success-color: #0E8A16;
+            --error-color: #dc3545;
+            
+            /* Variables de Tema */
+            --bg-body: #fdfdfd;
+            --bg-card: #ffffff;
+            --text-main: #333333;
+            --text-muted: #5e5e5e;
+            --text-header: #ffffff;
+            --meta-bg: #f5f5f5;
+            --meta-border: #e0e0e0;
+            --card-shadow: 0 4px 20px rgba(233, 84, 32, 0.15);
+            --highlight-bg: #fff3e0;
+            --highlight-text: #d84315;
+            --btn-back-bg: #333333;
+            --btn-back-hover: #000000;
+        }
+
+        /* MODO OSCURO */
+        html.dark-mode {
+            --primary-color: #ff8a65;
+            --primary-dark: #2c001e; /* Dark Aubergine */
+            --secondary-color: #9575cd;
+            --bg-body: #121212;
+            --bg-card: #1e1e1e;
+            --text-main: #e0e0e0;
+            --text-muted: #b0b0b0;
+            --meta-bg: #2d2d2d;
+            --meta-border: #404040;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+            --highlight-bg: #3e2723;
+            --highlight-text: #ffccbc;
+            --btn-back-bg: #424242;
+            --btn-back-hover: #212121;
+        }
+
+        body {
+            font-family: 'Ubuntu', 'Segoe UI', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--bg-body);
+            margin: 0; padding: 0;
+        }
+
+        body.animate-transition {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease;
+            border-top: 5px solid var(--primary-color);
+        }
+        
+        .card:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: var(--text-header);
+            padding: 3rem 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        header h1 { margin: 0; font-size: 2.4rem; font-weight: 700; letter-spacing: 0.5px; }
+        header p { font-size: 1.1rem; opacity: 0.95; margin-top: 10px; font-weight: 400; }
+
+        .theme-toggle-btn {
+            position: absolute;
+            top: 20px; right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        .theme-toggle-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Contenedor */
+        .container {
+            max-width: 1000px;
+            margin: -40px auto 2rem auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .card h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--meta-border);
+            padding-bottom: 10px; margin-top: 0;
+            font-size: 1.5rem;
+        }
+        
+        html.dark-mode .card h2 { color: var(--primary-color); }
+
+        /* Metadatos */
+        .project-meta {
+            display: flex; flex-wrap: wrap; gap: 12px;
+            margin-bottom: 1.8rem; font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        .meta-item {
+            background: var(--meta-bg);
+            padding: 6px 16px;
+            border-radius: 4px;
+            border: 1px solid var(--meta-border);
+            display: flex; align-items: center; gap: 6px;
+        }
+
+        /* Grid */
+        .grid-2 {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+        }
+        @media (max-width: 768px) {
+            .grid-2 { grid-template-columns: 1fr; }
+            .btn-container { flex-direction: column; }
+        }
+
+        ul.feature-list { list-style-type: none; padding: 0; }
+        ul.feature-list li { margin-bottom: 12px; padding-left: 24px; position: relative; }
+        ul.feature-list li::before {
+            content: "➜"; color: var(--primary-color);
+            position: absolute; left: 0; font-weight: bold;
+        }
+
+        .tech-stack { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 15px; }
+        .tech-tag {
+            background-color: var(--meta-bg); 
+            color: var(--text-main);
+            border: 1px solid var(--secondary-color);
+            padding: 4px 10px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;
+        }
+        html.dark-mode .tech-tag {
+            background-color: rgba(119, 123, 180, 0.2);
+            color: #d1c4e9;
+        }
+
+        .highlight-box {
+            background-color: var(--highlight-bg);
+            border-left: 4px solid var(--primary-color);
+            padding: 15px; margin: 20px 0;
+            color: var(--highlight-text);
+            border-radius: 0 5px 5px 0;
+            font-size: 0.95rem;
+        }
+
+        /* Botones */
+        .btn-container {
+            display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;
+            margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--meta-border);
+        }
+
+        .btn {
+            padding: 12px 28px; border-radius: 50px;
+            text-decoration: none; font-weight: 600;
+            transition: all 0.3s ease; display: inline-flex;
+            align-items: center; gap: 8px; cursor: pointer;
+            border: none; font-size: 1rem; font-family: inherit;
+        }
+
+        .btn-back { background-color: var(--btn-back-bg); color: white; }
+        .btn-back:hover { background-color: var(--btn-back-hover); transform: translateY(-2px); }
+
+        /* Botón ZIP */
+        .btn-download {
+            background-color: var(--primary-color); color: white;
+        }
+        .btn-download:hover {
+            background-color: #d84315; 
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(233, 84, 32, 0.4);
+        }
+
+        /* Botón PDF */
+        .btn-pdf {
+            background-color: var(--primary-dark); color: white;
+        }
+        .btn-pdf:hover {
+            background-color: #5c1e3d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(119, 41, 83, 0.4);
+        }
+
+        .error-msg {
+            color: var(--error-color);
+            font-weight: bold;
+            margin-top: 15px;
+            display: none;
+            font-size: 0.9rem;
+            background: rgba(220, 53, 69, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--error-color);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <button id="theme-toggle" class="theme-toggle-btn" title="Cambiar Tema">🌙</button>
+
+        <div class="container" style="margin-top: 0; margin-bottom: 0; padding-bottom: 2rem;">
+            <h1>Ejercicio Práctico: Sucesos y Más</h1>
+            <p>Desarrollo Web Full Stack & Administración de Servidores Linux</p>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <div class="card">
+            <div class="project-meta">
+                <div class="meta-item">👥 <strong>Equipo:</strong> C. Miranda & M. Harris</div>
+                <div class="meta-item">🐧 <strong>OS:</strong> Ubuntu Linux 22.04</div>
+                <div class="meta-item">🛠️ <strong>Stack:</strong> XAMPP / Apache / PHP</div>
+                <div class="meta-item">📄 <strong>Evaluación:</strong> 100 Puntos</div>
+            </div>
+
+            <h2>Descripción General</h2>
+            <p>
+                Este proyecto integral combina el desarrollo frontend/backend con la administración de sistemas. 
+                <strong>Parte I:</strong> Creación del portal web "Sucesos y Más" con sistema de facturación PDF dinámico y protección de código.
+                <strong>Parte II y III:</strong> Implementación de un servidor de datos Linux virtualizado, accesible vía SSH/FTP, y despliegue del entorno de producción utilizando XAMPP.
+            </p>
+            
+            <div class="highlight-box">
+                <strong>Hito Técnico:</strong> Configuración exitosa de acceso remoto (SSH) y transferencia de archivos (vsftpd) entre Host Windows y Guest Linux con direccionamiento IP Estático (192.168.50.182).
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="card">
+                <h2>Desarrollo Web (Parte I)</h2>
+                <ul class="feature-list">
+                    [cite_start]<li><strong>Portal Responsive:</strong> HTML5/CSS3 con soporte persistente Dark/Light Mode[cite: 364].</li>
+                    [cite_start]<li><strong>Facturación Dinámica:</strong> Generación de facturas PDF usando PHP y librería <code>html2pdf.js</code>[cite: 391].</li>
+                    [cite_start]<li><strong>Seguridad Frontend:</strong> Bloqueo de clic derecho y atajos (Ctrl+U) para protección de código[cite: 388].</li>
+                    <li><strong>Navegación:</strong> Menú dinámico con secciones: Inicio, Clientes, Productos, Servicios y Contacto.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>Infraestructura Linux (Partes II y III)</h2>
+                <ul class="feature-list">
+                    [cite_start]<li><strong>Servidor SSH:</strong> Acceso remoto configurado mediante <code>openssh-server</code>[cite: 416].</li>
+                    [cite_start]<li><strong>Servidor FTP:</strong> Transferencia de archivos configurada con <code>vsftpd</code> (Modo Pasivo/Write Enable)[cite: 428].</li>
+                    [cite_start]<li><strong>XAMPP en Linux:</strong> Instalación de pila LAMP (Apache, MySQL, ProFTPD) en <code>/opt/lampp</code>[cite: 372].</li>
+                    [cite_start]<li><strong>DocumentRoot:</strong> Enlace simbólico y permisos 755 para la carpeta de producción[cite: 475].</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Tecnologías Implementadas</h2>
+            <div class="tech-stack">
+                <span class="tech-tag">PHP 8.x</span>
+                <span class="tech-tag">Ubuntu Linux</span>
+                <span class="tech-tag">Apache Web Server</span>
+                <span class="tech-tag">XAMPP</span>
+                <span class="tech-tag">SSH / FTP</span>
+                <span class="tech-tag">VirtualBox</span>
+                <span class="tech-tag">JavaScript (html2pdf)</span>
+            </div>
+        </div>
+
+        <div class="card" style="text-align: center;">
+            <h2>Descargas del Proyecto</h2>
+            <p>Acceda al código fuente completo del sitio web o descargue el informe detallado con las pruebas de servidor.</p>
+
+            <div class="btn-container">
+                <button onclick="descargarArchivo('zip')" class="btn btn-download">
+                    <span style="font-size: 1.2rem;">📦</span> Código Fuente (.zip)
+                </button>
+
+                <button onclick="descargarArchivo('pdf')" class="btn btn-pdf">
+                    <span style="font-size: 1.2rem;">📑</span> Informe Técnico (.pdf)
+                </button>
+
+                <a href="../proyectos.html" class="btn btn-back">
+                    <span>←</span> Volver al Portafolio
+                </a>
+            </div>
+            
+            <div id="error-msg" class="error-msg">⚠️ Error: Archivo no encontrado. Verifique que 'proyecto6.zip' o el PDF estén en el servidor.</div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- MODO OSCURO ---
+        const themeBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        if (htmlElement.classList.contains('dark-mode')) {
+            themeBtn.innerText = '☀️';
+        }
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.body.classList.add('animate-transition');
+            }, 100);
+        });
+
+        themeBtn.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark-mode');
+            let theme = 'light';
+            if (htmlElement.classList.contains('dark-mode')) {
+                theme = 'dark';
+                themeBtn.innerText = '☀️';
+            } else {
+                themeBtn.innerText = '🌙';
+            }
+            localStorage.setItem('theme', theme);
+        });
+
+        // --- LÓGICA DE DESCARGA ---
+        async function descargarArchivo(tipo) {
+            const errorMsg = document.getElementById('error-msg');
+            errorMsg.style.display = 'none'; 
+
+            let rutas = [];
+            let extension = '';
+
+            if (tipo === 'zip') {
+                // Nombres probables para el ZIP
+                rutas = ['proyecto6.zip', 'Ejercicio_Practico1.zip', 'sucesos_y_mas.zip'];
+                extension = '.zip';
+            } else if (tipo === 'pdf') {
+                // Nombres probables para el PDF (incluyendo el nombre largo del archivo subido)
+                rutas = [
+                    'proyecto6.pdf', 
+                    'Ejercicio_Practico1_Carlos_MirandaAndMariamHarris.pdf', 
+                    'Ejercicio Práctico1 1 (2).pdf',
+                    'informe_sucesos.pdf'
+                ];
+                extension = '.pdf';
+            }
+            
+            let archivoEncontrado = false;
+
+            for (const ruta of rutas) {
+                try {
+                    const response = await fetch(ruta, { method: 'HEAD' });
+                    if (response.ok) {
+                        if (tipo === 'pdf') {
+                            // Abrir PDF en nueva pestaña
+                            window.open(ruta, '_blank');
+                        } else {
+                            // Descargar ZIP
+                            const link = document.createElement('a');
+                            link.href = ruta;
+                            link.download = ruta;
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                        }
+                        archivoEncontrado = true;
+                        break; 
+                    }
+                } catch (error) { console.log(`Check fallido para ${ruta}`); }
+            }
+
+            if (!archivoEncontrado) {
+                errorMsg.style.display = 'block';
+                errorMsg.innerText = `⚠️ No se encontró el archivo ${extension}. Asegúrate de subirlo con uno de los nombres esperados.`;
+            }
+        }
+    </script>
+
+</body>
+</html>

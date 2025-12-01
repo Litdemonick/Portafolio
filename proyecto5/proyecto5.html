@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto 5: Examen Parcial - Redes y Servidores | Portafolio</title>
+    
+    <script src="../scripts/protect.js" defer></script>
+
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+
+    <style>
+        :root {
+            /* Colores Base (Tema Infraestructura - Verde Azulado/Azul) */
+            --primary-color: #00897b; /* Teal Profesional */
+            --primary-dark: #00564d;
+            --secondary-color: #1e88e5; /* Azul Cisco */
+            --accent-color: #ffb300; /* Amber para alertas/notas */
+            --error-color: #d32f2f;
+            
+            /* Variables de Tema */
+            --bg-body: #f0f4f8;
+            --bg-card: #ffffff;
+            --text-main: #37474f;
+            --text-muted: #607d8b;
+            --text-header: #ffffff;
+            --meta-bg: #eceff1;
+            --meta-border: #cfd8dc;
+            --card-shadow: 0 4px 20px rgba(0, 137, 123, 0.1);
+            --highlight-bg: #e0f2f1;
+            --highlight-text: #00695c;
+            --btn-back-bg: #455a64;
+            --btn-back-hover: #263238;
+        }
+
+        /* MODO OSCURO */
+        html.dark-mode {
+            --primary-color: #4db6ac;
+            --primary-dark: #004d40;
+            --secondary-color: #64b5f6;
+            --bg-body: #102027;
+            --bg-card: #1c313a;
+            --text-main: #eceff1;
+            --text-muted: #b0bec5;
+            --meta-bg: #263238;
+            --meta-border: #37474f;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            --highlight-bg: #004d40;
+            --highlight-text: #b2dfdb;
+            --btn-back-bg: #37474f;
+            --btn-back-hover: #1c313a;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--bg-body);
+            margin: 0; padding: 0;
+        }
+
+        body.animate-transition {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            border-left: 5px solid var(--primary-color);
+        }
+        
+        .card:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+            color: var(--text-header);
+            padding: 3rem 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        header h1 { margin: 0; font-size: 2.4rem; font-weight: 700; letter-spacing: 0.5px; }
+        header p { font-size: 1.1rem; opacity: 0.9; margin-top: 10px; font-weight: 300; }
+
+        .theme-toggle-btn {
+            position: absolute;
+            top: 20px; right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        .theme-toggle-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: rotate(15deg);
+        }
+
+        /* Contenedor */
+        .container {
+            max-width: 1000px;
+            margin: -40px auto 2rem auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .card h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--meta-border);
+            padding-bottom: 10px; margin-top: 0;
+            font-size: 1.5rem;
+        }
+        
+        html.dark-mode .card h2 { color: var(--secondary-color); }
+
+        /* Metadatos */
+        .project-meta {
+            display: flex; flex-wrap: wrap; gap: 12px;
+            margin-bottom: 1.8rem; font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        .meta-item {
+            background: var(--meta-bg);
+            padding: 6px 16px;
+            border-radius: 6px;
+            border: 1px solid var(--meta-border);
+            display: flex; align-items: center; gap: 6px;
+        }
+
+        /* Grid */
+        .grid-2 {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+        }
+        @media (max-width: 768px) {
+            .grid-2 { grid-template-columns: 1fr; }
+            .btn-container { flex-direction: column; }
+        }
+
+        ul.feature-list { list-style-type: none; padding: 0; }
+        ul.feature-list li { margin-bottom: 12px; padding-left: 24px; position: relative; }
+        ul.feature-list li::before {
+            content: "•"; color: var(--primary-color);
+            position: absolute; left: 0; font-weight: bold; font-size: 1.2em;
+        }
+
+        .tech-stack { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 15px; }
+        .tech-tag {
+            background-color: var(--meta-bg); 
+            color: var(--text-main);
+            border-left: 3px solid var(--secondary-color);
+            padding: 4px 10px; border-radius: 0 4px 4px 0; font-size: 0.85rem; font-weight: 600;
+        }
+
+        .highlight-box {
+            background-color: var(--highlight-bg);
+            border: 1px dashed var(--primary-color);
+            padding: 15px; margin: 20px 0;
+            color: var(--highlight-text);
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+
+        /* Botones */
+        .btn-container {
+            display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;
+            margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--meta-border);
+        }
+
+        .btn {
+            padding: 12px 28px; border-radius: 6px;
+            text-decoration: none; font-weight: 600;
+            transition: all 0.3s ease; display: inline-flex;
+            align-items: center; gap: 8px; cursor: pointer;
+            border: none; font-size: 1rem; font-family: inherit;
+        }
+
+        .btn-back { background-color: var(--btn-back-bg); color: white; }
+        .btn-back:hover { background-color: var(--btn-back-hover); transform: translateY(-2px); }
+
+        .btn-download {
+            background-color: var(--primary-color); color: white;
+        }
+        .btn-download:hover {
+            background-color: var(--primary-dark); 
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 137, 123, 0.4);
+        }
+
+        /* Botón Cisco Packet Tracer */
+        .btn-pkt {
+            background-color: var(--secondary-color); color: white;
+        }
+        .btn-pkt:hover {
+            filter: brightness(1.1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(30, 136, 229, 0.4);
+        }
+
+        .error-msg {
+            color: var(--error-color);
+            font-weight: bold;
+            margin-top: 15px;
+            display: none;
+            font-size: 0.9rem;
+            background: rgba(211, 47, 47, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--error-color);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <button id="theme-toggle" class="theme-toggle-btn" title="Cambiar Tema">🌙</button>
+
+        <div class="container" style="margin-top: 0; margin-bottom: 0; padding-bottom: 2rem;">
+            <h1>Examen Parcial 1: Infraestructura & Desarrollo</h1>
+            <p>Solución integral: Servidores Linux, Redes WAN y Desarrollo Web (CEL)</p>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <div class="card">
+            <div class="project-meta">
+                <div class="meta-item">👨‍🏫 <strong>Profesor:</strong> Napoleón Ibarra</div>
+                <div class="meta-item">🗓️ <strong>Fecha:</strong> 30/09/2025</div>
+                <div class="meta-item">🎓 <strong>Materia:</strong> Des. Software IV</div>
+                <div class="meta-item">🏆 <strong>Valor:</strong> 100 Puntos</div>
+            </div>
+
+            <h2>Resumen del Examen</h2>
+            <p>
+                Este proyecto abarca tres áreas fundamentales de la ingeniería de sistemas. Se implementó un <strong>Servidor Web NGINX</strong> sobre Linux virtualizado, se diseñó una topología de red WAN conectando sedes en <strong>David (Federal Mall)</strong> y <strong>Veraguas (Santiago Mall)</strong>, y se desarrolló el portal web para el <strong>Centro Especializado en Lenguas (CEL)</strong>.
+            </p>
+            
+            <div class="highlight-box">
+                <strong>Configuración de Red:</strong><br>
+                ISP1 (David): TLK | ISP2 (Santiago): TYGO<br>
+                Enrutamiento entre subredes 192.168.10.x y 192.168.100.x
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <div class="card">
+                <h2>Componentes Desarrollados</h2>
+                <ul class="feature-list">
+                    <li><strong>I Parte (Servidor):</strong> Instalación de VM Linux + Configuración de NGINX Server en Datacenter.</li>
+                    <li><strong>II Parte (Redes):</strong> Simulación Cisco de conexión interprovincial (Chiriquí - Veraguas).</li>
+                    <li><strong>Equipos:</strong> Configuración de Routers, Switches 2960, Extensores y PCs/Laptops.</li>
+                    <li><strong>III Parte (Web CEL):</strong> Sitio web responsivo (HTML/CSS/ASP) con protección de código.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>Tecnologías Utilizadas</h2>
+                <div class="tech-stack">
+                    <span class="tech-tag">Linux (Debian/Ubuntu)</span>
+                    <span class="tech-tag">NGINX Web Server</span>
+                    <span class="tech-tag">Cisco Packet Tracer</span>
+                    <span class="tech-tag">HTML5 / CSS3</span>
+                    <span class="tech-tag">ASP Classic</span>
+                    <span class="tech-tag">VirtualBox</span>
+                </div>
+                <p style="margin-top: 20px; font-size: 0.9rem; color: var(--text-muted);">
+                    El sitio web del CEL incluye secciones de Cursos, Horarios, Servicios y Misión/Visión, siguiendo la línea gráfica institucional.
+                </p>
+            </div>
+        </div>
+
+        <div class="card" style="text-align: center;">
+            <h2>Descarga de Entregables</h2>
+            <p>Seleccione el formato deseado. El archivo PKT contiene la topología de red simulada.</p>
+
+            <div class="btn-container">
+                <button onclick="descargarArchivo('zip')" class="btn btn-download">
+                    <span style="font-size: 1.2rem;">🗂️</span> Descargar Proyecto (.zip)
+                </button>
+
+                <button onclick="descargarArchivo('pkt')" class="btn btn-pkt">
+                    <span style="font-size: 1.2rem;">🌐</span> Descargar Topología (.pkt)
+                </button>
+
+                <a href="../proyectos.html" class="btn btn-back">
+                    <span>←</span> Volver al Portafolio
+                </a>
+            </div>
+            
+            <div id="error-msg" class="error-msg">⚠️ Error: No se encontró el archivo solicitado. Verifique la carpeta del servidor.</div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- MODO OSCURO ---
+        const themeBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        if (htmlElement.classList.contains('dark-mode')) {
+            themeBtn.innerText = '☀️';
+        }
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.body.classList.add('animate-transition');
+            }, 100);
+        });
+
+        themeBtn.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark-mode');
+            let theme = 'light';
+            if (htmlElement.classList.contains('dark-mode')) {
+                theme = 'dark';
+                themeBtn.innerText = '☀️';
+            } else {
+                themeBtn.innerText = '🌙';
+            }
+            localStorage.setItem('theme', theme);
+        });
+
+        // --- LÓGICA DE DESCARGA ---
+        async function descargarArchivo(tipo) {
+            const errorMsg = document.getElementById('error-msg');
+            errorMsg.style.display = 'none'; 
+
+            let rutas = [];
+            let extension = '';
+
+            if (tipo === 'zip') {
+                rutas = ['ExamenParcial1.zip', 'parcial1.zip', 'proyecto5.zip', 'entregable_parcial1.rar'];
+                extension = '.zip';
+            } else if (tipo === 'pkt') {
+                rutas = ['ExamenParcial1.pkt', 'proyecto5.pkt', 'diagrama_red.pkt', 'oficinas.pkt'];
+                extension = '.pkt';
+            }
+            
+            let archivoEncontrado = false;
+
+            for (const ruta of rutas) {
+                try {
+                    const response = await fetch(ruta, { method: 'HEAD' });
+                    if (response.ok) {
+                        const link = document.createElement('a');
+                        link.href = ruta;
+                        link.download = ruta;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        archivoEncontrado = true;
+                        break; 
+                    }
+                } catch (error) { console.log(`Intento fallido para ${ruta}`); }
+            }
+
+            if (!archivoEncontrado) {
+                errorMsg.style.display = 'block';
+                errorMsg.innerText = `⚠️ No se encontró el archivo ${extension}. Asegúrese de subir 'ExamenParcial1${extension}' a la carpeta.`;
+            }
+        }
+    </script>
+
+</body>
+</html>

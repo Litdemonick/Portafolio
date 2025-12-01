@@ -1,0 +1,11 @@
+# --- Archivos de Sistema y Entorno (ESTOS SÍ SE IGNORAN) ---
+.DS_Store
+Thumbs.db
+.vscode/
+*.log
+node_modules/
+.env
+
+# --- ¡IMPORTANTE! ---
+# NO pongas aquí ni index.html, ni tus carpetas de proyecto,
+# ni tus scripts. Si los pones aquí, tu página web dejará de funcionar.
