@@ -12,12 +12,24 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="habilidades.style.css">
     <style>
+        /* Quita el subrayado y color azul de los enlaces */
         a.skill-card,
         a.skill-card:hover,
         a.skill-card:visited,
         a.skill-card:active {
             text-decoration: none !important;
             color: inherit !important;
+        }
+
+        /* Ajuste para que el SVG de Cisco se vea del mismo tamaño que los iconos de FontAwesome */
+        .cisco-svg {
+            width: 1em;
+            height: 1em;
+            font-size: 3rem;
+            /* Tamaño aproximado de los iconos */
+            fill: currentColor;
+            /* Toma el color del tema */
+            margin-bottom: 10px;
         }
     </style>
     <script src="scripts/protect.js" defer></script>
@@ -78,7 +90,6 @@
 
         <section id="tech-skills">
             <h2 data-i18n="skills_tech_title">Tecnologías y Herramientas que he utilizado</h2>
-
             <div class="skills-grid">
                 <a href="https://www.python.org/downloads/" target="_blank" rel="noopener noreferrer"
                     class="skill-card">
@@ -139,7 +150,11 @@
 
                 <a href="https://www.netacad.com/courses/packet-tracer" target="_blank" rel="noopener noreferrer"
                     class="skill-card">
-                    <i class="fa-brands fa-cisco"></i><span>Cisco</span>
+                    <svg class="cisco-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path
+                            d="M467 211h-23v-58h23v58zm-352 0h-23v-58h23v58zm176 0h-23V65h23v146zM227 211h-23V117h23v94zm117 0h-23V117h23v94zm-175 58v58h-23v-58h-88v58H35v-58H12v81h488v-81h-23v58h-88v-58h-23v58h-88v-58h-23zm23-58h23V65h-23v146zM80 211H57v-29h23v29zm375 0h-23v-29h23v29z" />
+                    </svg>
+                    <span>Cisco</span>
                 </a>
             </div>
         </section>
