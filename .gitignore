@@ -1,0 +1,55 @@
+# 1. Carpetas de Proyectos Desplegadas (Ocultar el contenido público)
+# Ocultamos el contenido de las carpetas proyecto1 a proyecto10, 
+# ya que indicas que contienen cosas que se ven en la página web pública 
+# (el sitio desplegado) y no quieres que se vean en el repositorio.
+
+/proyecto1/
+/proyecto2/
+/proyecto3/
+/proyecto4/
+/proyecto5/
+/assets/
+/proyecto6/
+/proyecto7/
+/proyecto8/
+/proyecto9/
+/scripts/
+/proyecto10/
+
+# Ignora este archivo HTML específico si no lo quieres en el repo
+
+proyectos.html
+habilidades.html
+index.html
+proyectos.js
+README.md
+script.js
+scripts2.js
+sobremi.html
+
+# Si la carpeta 'assets' también tiene contenido que es el 
+# resultado del despliegue y no quieres versionar, puedes añadirla también:
+# /assets/ 
+# ¡Pero ten cuidado! Si 'assets' contiene imágenes, fuentes o CSS 
+# base que SÍ quieres versionar, NO la añadas aquí.
+
+# 2. Archivos de Configuración Comunes / Temporales
+# Son archivos que a menudo se generan automáticamente o que 
+# contienen datos específicos de tu entorno local que no deben 
+# compartirse en un repositorio público.
+
+# Archivos de depuración y logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# Archivos de VS Code (comunes)
+.vscode/
+
+# Archivos del sistema operativo
+.DS_Store # Mac
+Thumbs.db # Windows
+
+# 3. Dependencias de Node (Si usas NPM o Yarn para el front-end)
+# Si instalaste librerías con `npm install` o `yarn install`
+node_modules/
